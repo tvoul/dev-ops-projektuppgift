@@ -96,6 +96,12 @@
     },
     "tablesAndViews": {
       "get": true
+    },
+    "ordersByCustomer": {
+      "get": true
+    },
+    "sessions": {
+      "get": true
     }
   }
 }
