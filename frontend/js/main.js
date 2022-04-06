@@ -41,7 +41,7 @@ async function reactOnUserSelectChoices(event) {
 
 async function start(userRole) {
   
-  if (userRole === 'user' && window.location.pathname == '/userpage.html'){
+  if (userRole === 'user' && window.location.pathname == '/user.html'){
     document.querySelector('main').innerHTML = '<h1>You are logged in, showing your orders</h1>'
     let selectData = (await getData('/api/my-orders'))
     selectData.unshift('table: my-orders');
