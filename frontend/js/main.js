@@ -40,14 +40,19 @@ async function reactOnUserSelectChoices(event) {
 }
 
 async function start(userRole) {
-  document.querySelector('main').innerHTML =
-    userRole === 'user' ? '<h1>You are logged in...</h1>' : '<h1>Admin view</h1>';
-  if (userRole === 'user') {
-    return;
+  
+  if (userRole === 'user' && window.location.pathname == '/userpage.html'){
+    document.querySelector('main').innerHTML = '<h1>You are logged in, showing your orders</h1>'
+    let selectData = (await getData('/api/my-orders'))
+    selectData.unshift('table: my-orders');
+    renderSelectBox('.data-table', selectData, reactOnUserSelectChoices);
   }
-  let selectData = (await getData('/api/tablesAndViews'))
+  else if(userRole === 'superadmin'  && window.location.pathname == '/user.html'){
+    document.querySelector('main').innerHTML = '<h1>Admin view</h1>'
+    let selectData = (await getData('/api/tablesAndViews'))
     .map(item => item.type + ': ' + item.name).sort()
     .filter(x => x !== 'table: customers');
-  selectData.unshift('table: customers');
-  renderSelectBox('.select-holder', selectData, reactOnUserSelectChoices);
+    selectData.unshift('table: customers');
+    renderSelectBox('.select-holder', selectData, reactOnUserSelectChoices);
+  }
 }
