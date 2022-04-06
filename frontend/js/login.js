@@ -44,7 +44,8 @@ document.querySelector('body').addEventListener('submit', async (event) => {
     return;
   }
 
-  location.reload();
+  //location.reload();
+  window.location.href = './user.html'
 
 });
 
