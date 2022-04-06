@@ -98,5 +98,22 @@ input[type="submit"] {
 }
 
 a {
-  color: rgb(148, 195, 223);
+  color: rgb(20, 166, 182);
+  text-decoration: none;
+}
+
+ul.horizontal {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+
+
+li.horizontal{
+  right: 20px;
+  top: 20px;
+  display: inline;
+  text-decoration: none;
 }
