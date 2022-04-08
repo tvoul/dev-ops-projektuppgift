@@ -10,7 +10,7 @@ module.exports = function (app, db) {
     resave: false,
     saveUninitialized: true,
     cookie: { secure: 'auto' },
-    store: store({ dbPath: './database/bookshop.db' })
+    store: store({ dbPath: './database/shop.db' })
   }));
 
   app.post('/api/login', (req, res) => {
