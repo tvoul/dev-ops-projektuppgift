@@ -1,8 +1,8 @@
-async function showBooks(){
-    document.querySelector('main').innerHTML = '<h1>Books available</h1>'
-    let selectData = (await getData('/api/books'))
-    selectData.unshift('table: books');
+async function showProducts(){
+    document.querySelector('main').innerHTML = '<h1>Products available</h1>'
+    let selectData = (await getData('/api/products'))
+    selectData.unshift('table: products');
     renderSelectBox('.data-table', selectData, reactOnUserSelectChoices);
 }
 
-showBooks()
+showProducts()
