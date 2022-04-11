@@ -1,6 +1,6 @@
 body {
   background-color: black;
-  color: white;
+  color: whitesmoke;
 }
 
 table {
@@ -116,4 +116,75 @@ li.horizontal{
   top: 20px;
   display: inline;
   text-decoration: none;
+}
+
+.productInList {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: rgb(208, 220, 236);
+  color: black;
+}
+
+.productInList h3 {
+  cursor: pointer;
+}
+
+.productInList img {
+  float: right;
+  width: 200px;
+  max-height: 200px;
+}
+
+.product img {
+  float: right;
+  width: 40%;
+  margin: 0 20px 40px 20px;
+  background-color: rgb(208, 220, 236);
+}
+
+.backButton {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: rgb(42, 135, 65);
+  color: white;
+}
+
+.product .price {
+  float: right;
+  margin-top: -10px;
+}
+
+.buyButton {
+  cursor: pointer;
+}
+
+main {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.shoppingCart {
+  right: 20px;
+  top: 20px;
+  background-color: #eee;
+  border-radius: 10px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.shoppingCart td {
+  padding: 2px 10px;
+  text-align: right;
+}
+
+.shoppingCart td:nth-child(2) {
+  text-align: left;
+}
+
+.shoppingCart tr:last-child {
+  padding-top: 10px;
+  font-weight: bold
 }

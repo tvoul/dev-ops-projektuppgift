@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hello world!</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -18,19 +19,33 @@
   <ul class="horizontal">
     <li class="horizontal"><a href="index.html">Home</a></li>
     <li class="horizontal"><a href="user.html">Userpage</a></li>
-    <li class="horizontal"><a href="cart.html">ShopCart</a></li>
+    <li class="horizontal"><a href="#footer">ShopCart</a></li>
   </ul>
   <main>
     <h1>Welcome!</h1>
   </main>
+
+  <section id="cart"></section>
+  <section id="user"></section>
+
+  <footer id="footer">
+
+  </footer>
   <div class="select-holder"></div>
   <div class="data-table"></div>
   <script src="/js/rest-json-cleaner.js"></script>
   <script src="/js/registration.js"></script>
   <script src="/js/login.js"></script>
   <script src="/js/register-and-login.js"></script>
+  <script src="/js/Product.js"></script>
+  <script src="/js/ProductList.js"></script>
+  <script src="/js/ShoppingCart.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="/js/main.js"></script>
-  <script src="/js/bookList.js"></script>
 </body>
 
 </html>
