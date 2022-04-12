@@ -12,11 +12,8 @@
   "dependencies": {
     "better-express-store": "^1.0.4",
     "better-sqlite3": "^7.5.0",
-    "chai": "^4.3.6",
     "express": "^4.17.2",
-    "express-session": "^1.17.2",
-    "jsdom": "^19.0.0",
-    "save-dev": "^0.0.1-security"
+    "express-session": "^1.17.2"
   },
   "directories": {
     "test": "test"
@@ -31,5 +28,8 @@
   "homepage": "https://github.com/tvoul/dev-ops-projektuppgift#readme",
   "devDependencies": {
     "jest": "^27.5.1"
-  }
+  },
+  "jest":{
+    "testEnvironment": "jsdom"
+}
 }
