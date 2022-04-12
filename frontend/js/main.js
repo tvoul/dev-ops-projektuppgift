@@ -1,4 +1,3 @@
-
 async function getData(restRoute) {
   let rawData = await fetch(restRoute);
   let result = await rawData.json();
@@ -56,3 +55,5 @@ async function start(userRole) {
     renderSelectBox('.select-holder', selectData, reactOnUserSelectChoices);
   }
 }
+
+new ProductList()
