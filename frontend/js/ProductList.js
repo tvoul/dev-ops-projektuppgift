@@ -78,7 +78,9 @@ function listen(eventType, cssSelector, func) {
     });
   }
 
-if (typeof module === 'object' && module.exports) {
+  // For Jest - check if we are in a Node.js enviroment
+  // if so export the class for Jest
+  if (typeof module === 'object' && module.exports) {
     module.exports = ProductList;
   }
 
