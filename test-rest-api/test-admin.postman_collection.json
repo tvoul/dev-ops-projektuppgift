@@ -321,6 +321,179 @@
 			"response": []
 		},
 		{
+			"name": "Update the 10 products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"//add an S at the end of the properties firstName, lastName, and email",
+							"mockTestProducts[counter].name += 'MAGIC';",
+							"mockTestProducts[counter].description += 'MAGIC';",
+							"",
+							"//save the mockDataPersons back to our environment variable",
+							"pm.environment.set('mockTestProducts', JSON.stringify(mockTestProducts));",
+							"",
+							"// Get the id of the current mock data person",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);",
+							"",
+							"let {name, description, price, img_link}= mockTestProducts[counter];",
+							"pm.environment.set('name', name);",
+							"pm.environment.set('description', description);",
+							"pm.environment.set('price', price)",
+							"pm.environment.set('img_link', img_link)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// get the response data",
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that the database reports 1 change\", function(){",
+							"    pm.expect(response.changes).to.equal(1);",
+							"});",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockDataPersons",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Update the 10 products\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"description\": \"{{description}}\",\n    \"price\": \"{{price}}\",\n    \"img_link\": \"{{img_link}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the 10 products after update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// Get the id of the current mock data person",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// The response from the db",
+							"let response = pm.response.json();",
+							"",
+							"// The person data we expect in the response",
+							"let expectedProduct = mockTestProducts[counter];",
+							"",
+							"pm.test(\"Check that product data was correclty saved in the db, by reading it and comparing it to the original product data\", function(){",
+							"    pm.expect(response).to.deep.equal(expectedProduct);",
+							"} );",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockDataPersons",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Get the 10 products after update\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete 10 products",
 			"event": [
 				{
