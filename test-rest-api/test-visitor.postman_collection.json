@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "e0e4c12e-f1f1-4c84-88cd-5a5069b8fb5d",
+		"name": "test-visitor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let msg = {\"_error\":\"Not logged in\"}",
+							"",
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that noone is logged in\", function(){",
+							"    pm.expect(response).to.eql(msg);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();",
+							"let error = {\"_error\":\"Not allowed!\"}",
+							"",
+							"pm.test(\"Check that the database does not return 'not allowed'\", function(){",
+							"    pm.expect(response).to.not.equal(error);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get my-orders as visitor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that response code is 405 when visitor tries to access my-orders\", function(){",
+							"    pm.expect(pm.response.code).to.equal(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/my-orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"my-orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create product as visitor",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set('name', \"Fenngreek Seed\");",
+							"pm.environment.set('description', \"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\");",
+							"pm.environment.set('price', 136);",
+							"pm.environment.set('img_link', \"http://dummyimage.com/210x100.png/5fa2dd/ffffff\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that response code is 405 when visitor tries to create a product\", function(){",
+							"    pm.expect(pm.response.code).to.equal(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"description\": \"{{description}}\",\n    \"price\": \"{{price}}\",\n    \"img_link\": \"{{img_link}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

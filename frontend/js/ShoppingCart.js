@@ -24,7 +24,7 @@ class ShoppingCart {
       }
   
       // for now render the shopping cart to the footer
-      document.querySelector('footer').innerHTML =
+      document.querySelector('#shoppingCart').innerHTML =
         this.render();
     }
   
