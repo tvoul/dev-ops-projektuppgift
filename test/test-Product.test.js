@@ -2,26 +2,31 @@ const { expect } = require('@jest/globals');
 
 const Product = require('../frontend/js/Product.js');
 
-describe('Test the product class', () => {
+describe('Test the Product class', () => {
 
-    test('Creation of a product', () => {
+  test('Creation of a Product', () => {
 
-        let myProduct = new Product (1, 'Pizzaslice', 39, 'A slice of a pizza');
+    let myProduct = new Product(1, 'Broom stick', 200, 'A good broom stick.');
 
-        //Check that the constructor really sets the correct property values
-        expect(myProduct.id).toBe(1);
-        expect(myProduct.name).toBe('Pizzaslice');
-        expect(myProduct.price).toBe(39);
-        expect(myProduct.description).toBe('A slice of pizza');
+    // Check that the constructor really sets the correct property values
+    expect(myProduct.id).toBe(1);
+    expect(myProduct.name).toBe('Broom stick');
+    expect(myProduct.price).toBe(200);
+    expect(myProduct.description).toBe('A good broom stick.');
 
-    });
+  });
 
-    test('An id not equal to a number should fail for Product constructor', () => {
-        expect(() => {
-            new Product('Xa', 'X', 200, 'description');
-        }).toThrow();
-    });
-        expect(() => {
-            new Product(true, 'X', 200, 'description');
-        }).toThrow();
+  test('An id not equal to a number should fail for Product constructor', () => {
+
+    expect(() => {
+      new Product('xa', 'X', 200, 'description');
+    }).toThrow();
+
+    expect(() => {
+      new Product(true, 'X', 200, 'description');
+    }).toThrow();
+
+  })
+
+
 });
