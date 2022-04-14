@@ -27,9 +27,10 @@
   },
   "homepage": "https://github.com/tvoul/dev-ops-projektuppgift#readme",
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "jsdom": "^19.0.0"
   },
-  "jest":{
+  "jest": {
     "testEnvironment": "jsdom"
-}
+  }
 }
