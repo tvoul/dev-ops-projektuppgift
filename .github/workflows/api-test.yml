@@ -1,0 +1,42 @@
+name: api-test
+
+#Run this for all pushes and on pull request to dev and main
+on:
+  push:
+    branches: [dev, main]
+  pull_request: 
+    branches: [dev, main]
+
+jobs:
+  
+  ### Run api-tests with newman
+  api-tests:
+
+    runs-on: ubuntu-latest # on an ubuntu server
+    strategy:
+      matrix:
+        node-version: [14.x] # with Node.js 14.x
+  
+    steps:
+      # install node
+    - uses: actions/checkout@v2 
+      # checkout repo
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+      # install npm modules (using ci, instead of i)
+    - run: npm ci
+      # run the npm build command (not used in our project)
+    - run: npm run build --if-present
+      # install pm2
+    - run: npm install -g pm2
+      # run our Node.js based server/backend/REST-api using pm2
+    - run: pm2 start index.js
+      # install Newman
+    - run: npm install -g newman
+      # run our test collection using Newman
+    - run: newman run test-rest-api/test-visitor.postman_collection.json
+    - run: newman run test-rest-api/test-customer.postman_collection.json
+    - run: newman run test-rest-api/test-admin.postman_collection.json

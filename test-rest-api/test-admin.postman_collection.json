@@ -1,0 +1,685 @@
+{
+	"info": {
+		"_postman_id": "ba657f14-c1b9-45b7-8590-bb6922dcd32d",
+		"name": "test-admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get before login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var mockResp = {\"_error\":\"Not logged in\"}",
+							"var response = pm.response.json()",
+							"",
+							"pm.test('Check that i am not logged in from start', () => {",
+							"    pm.expect(response).to.eql(mockResp)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login as admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var mockResp = {\"id\":6,\"email\":\"anna.larsson@gmail.com\",\"firstName\":\"Anna\",\"lastName\":\"Larsson\",\"userRole\":\"superadmin\"}",
+							"let response = pm.response.json()",
+							"",
+							"pm.test('Check that i was able to log in', () => {",
+							"    pm.expect(response).to.eql(mockResp)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"anna.larsson@gmail.com\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create 10 products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let testProducts = [{",
+							"  \"name\": \"Fenngreek Seed\",",
+							"  \"description\": \"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\",",
+							"  \"price\": 136,",
+							"  \"img_link\": \"http://dummyimage.com/210x100.png/5fa2dd/ffffff\"",
+							"}, {",
+							"  \"name\": \"Table Cloth 91x91 Colour\",",
+							"  \"description\": \"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\",",
+							"  \"price\": 470,",
+							"  \"img_link\": \"http://dummyimage.com/208x100.png/dddddd/000000\"",
+							"}, {",
+							"  \"name\": \"Tomatoes - Roma\",",
+							"  \"description\": \"Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\",",
+							"  \"price\": 404,",
+							"  \"img_link\": \"http://dummyimage.com/232x100.png/5fa2dd/ffffff\"",
+							"}, {",
+							"  \"name\": \"Beef Wellington\",",
+							"  \"description\": \"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\",",
+							"  \"price\": 266,",
+							"  \"img_link\": \"http://dummyimage.com/108x100.png/5fa2dd/ffffff\"",
+							"}, {",
+							"  \"name\": \"Pork - Loin, Center Cut\",",
+							"  \"description\": \"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\",",
+							"  \"price\": 269,",
+							"  \"img_link\": \"http://dummyimage.com/107x100.png/ff4444/ffffff\"",
+							"}, {",
+							"  \"name\": \"Bagels Poppyseed\",",
+							"  \"description\": \"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\",",
+							"  \"price\": 311,",
+							"  \"img_link\": \"http://dummyimage.com/160x100.png/cc0000/ffffff\"",
+							"}, {",
+							"  \"name\": \"Tomatoes - Vine Ripe, Yellow\",",
+							"  \"description\": \"Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.\",",
+							"  \"price\": 168,",
+							"  \"img_link\": \"http://dummyimage.com/234x100.png/cc0000/ffffff\"",
+							"}, {",
+							"  \"name\": \"Sugar - Splenda Sweetener\",",
+							"  \"description\": \"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\",",
+							"  \"price\": 355,",
+							"  \"img_link\": \"http://dummyimage.com/246x100.png/ff4444/ffffff\"",
+							"}, {",
+							"  \"name\": \"Wine - Spumante Bambino White\",",
+							"  \"description\": \"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\",",
+							"  \"price\": 153,",
+							"  \"img_link\": \"http://dummyimage.com/234x100.png/5fa2dd/ffffff\"",
+							"}, {",
+							"  \"name\": \"Flower - Commercial Bronze\",",
+							"  \"description\": \"Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\",",
+							"  \"price\": 167,",
+							"  \"img_link\": \"http://dummyimage.com/145x100.png/5fa2dd/ffffff\"",
+							"}]",
+							"",
+							"",
+							"// Add the test data to an environment variable",
+							"// if that environment varaible does not exist",
+							"if(!pm.environment.get(\"mockTestProducts\")){",
+							"    // since environment variables can only be strings",
+							"    // we need to JSON encode the test data too...",
+							"    pm.environment.set(\"mockTestProducts\",JSON.stringify(testProducts));",
+							"    pm.environment.set(\"counter\", \"0\");",
+							"}",
+							"",
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"",
+							"let {name, description, price, img_link}= mockTestProducts[counter];",
+							"pm.environment.set('name', name);",
+							"pm.environment.set('description', description);",
+							"pm.environment.set('price', price);",
+							"pm.environment.set('img_link', img_link);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// get the response data",
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that the database reports 1 change\", function(){",
+							"    pm.expect(response.changes).to.equal(1);",
+							"});",
+							"",
+							"pm.test(\"Check that we get lastInsertRowid as a number\", function(){",
+							"    pm.expect(response.lastInsertRowid).to.be.a('number');",
+							"});",
+							"",
+							"// Add the id to the person in our mock data",
+							"mockTestProducts[counter].id = response.lastInsertRowid;",
+							"// and resave the mock data as an environment variable",
+							"pm.environment.set('mockTestProducts', JSON.stringify(mockTestProducts));",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockDataPersons",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Create 10 products\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"description\": \"{{description}}\",\n    \"price\": \"{{price}}\",\n    \"img_link\": \"{{img_link}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the 10 products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// Get the id of the current mock data product",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// The response from the db",
+							"let response = pm.response.json();",
+							"",
+							"// The product data we expect in the response",
+							"let expectedProduct = mockTestProducts[counter];",
+							"",
+							"pm.test(\"Check that product data was correclty saved in the db, by reading it and comparing it to the original mockdata\", function(){",
+							"    pm.expect(response).to.deep.equal(expectedProduct);",
+							"} );",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockDataProducts",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Get the 10 products\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update the 10 products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"//add an S at the end of the properties firstName, lastName, and email",
+							"mockTestProducts[counter].name += 'MAGIC';",
+							"mockTestProducts[counter].description += 'MAGIC';",
+							"",
+							"//save the mockDataPersons back to our environment variable",
+							"pm.environment.set('mockTestProducts', JSON.stringify(mockTestProducts));",
+							"",
+							"// Get the id of the current mock data person",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);",
+							"",
+							"let {name, description, price, img_link}= mockTestProducts[counter];",
+							"pm.environment.set('name', name);",
+							"pm.environment.set('description', description);",
+							"pm.environment.set('price', price)",
+							"pm.environment.set('img_link', img_link)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// get the response data",
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that the database reports 1 change\", function(){",
+							"    pm.expect(response.changes).to.equal(1);",
+							"});",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockDataPersons",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Update the 10 products\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"description\": \"{{description}}\",\n    \"price\": \"{{price}}\",\n    \"img_link\": \"{{img_link}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the 10 products after update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// Get the id of the current mock data person",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// The response from the db",
+							"let response = pm.response.json();",
+							"",
+							"// The person data we expect in the response",
+							"let expectedProduct = mockTestProducts[counter];",
+							"",
+							"pm.test(\"Check that product data was correclty saved in the db, by reading it and comparing it to the original product data\", function(){",
+							"    pm.expect(response).to.deep.equal(expectedProduct);",
+							"} );",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockDataPersons",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Get the 10 products after update\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete 10 products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// get the response datamockTestProducts",
+							"let response = pm.response.json();",
+							"",
+							"pm.test(\"Check that the database reports 1 change\", function(){",
+							"    pm.expect(response.changes).to.equal(1);",
+							"});",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockProducts",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Delete 10 products\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// Get the id of the current mock data person",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 10 non-existing products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// Get the id of the current mock data person",
+							"let {id} = mockTestProducts[counter];",
+							"// Set the id as an environment variable",
+							"pm.environment.set('id', id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"Unpack\" environment variables into normal local variables",
+							"let mockTestProducts = JSON.parse(pm.environment.get(\"mockTestProducts\"));",
+							"let counter = +pm.environment.get(\"counter\");",
+							"",
+							"// The response from the db",
+							"let response = pm.response.json();",
+							"",
+							"//pm.test(\"Check that the deleted product does not exist\", () => {",
+							"  //  pm.expect(response.error).to.equal('No such post');",
+							"//});",
+							"",
+							"pm.test(\"Check that the response status is 404\", () => {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"// Add one to the counter and save as environment variable",
+							"counter++;",
+							"pm.environment.set('counter', counter);",
+							"",
+							"// If there exist a peson in mockTestProducts",
+							"// with an index corresponding to the counter",
+							"// then run this request again",
+							"if(mockTestProducts[counter]){",
+							"  postman.setNextRequest(\"Get 10 non-existing products\");",
+							"}",
+							"",
+							"else {",
+							"   // we are done reset the counter to 0 ",
+							"   // the help the script in the next request",
+							"   pm.environment.set('counter', '0');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var mockResp = {\"success\":\"logged out\"}",
+							"var response = pm.response.json()",
+							"",
+							"pm.test('Check that i was logged out', () => {",
+							"    pm.expect(response).to.eql(mockResp)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
