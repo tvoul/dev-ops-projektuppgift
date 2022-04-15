@@ -71,6 +71,11 @@ class Product{
         });
     
         Product.eventListenersAdded = true;
-    
-      }
+
+   }
+  
+}
+
+if (typeof module === 'object' && module.exports) {
+  module.exports = Product;
 }
