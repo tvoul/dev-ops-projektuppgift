@@ -1,5 +1,7 @@
 const { expect } = require('@jest/globals');
 
+const {listen} = require('../frontend/js/helpers.js');
+global.listen = listen; // Make listen available for all files (Products etc)
 const Product = require('../frontend/js/Product.js');
 
 describe('Test the Product class', () => {

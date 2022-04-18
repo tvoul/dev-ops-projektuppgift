@@ -5,6 +5,7 @@ class Product{
             this.addEventListeners();
           }
 
+        if(typeof id !== 'number'){throw(new Error('id must be a number'))}
         this.id = id;
         this.name = name;
         this.price = price;
@@ -70,6 +71,11 @@ class Product{
         });
     
         Product.eventListenersAdded = true;
-    
-      }
+
+   }
+  
+}
+
+if (typeof module === 'object' && module.exports) {
+  module.exports = Product;
 }

@@ -17,5 +17,5 @@ function listen(eventType, cssSelector, func) {
     });
   }
 if (typeof module === 'object' && module.exports) {
-    module.exports = Product;
+    module.exports = {listen};
   }
