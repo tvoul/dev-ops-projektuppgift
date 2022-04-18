@@ -33,6 +33,7 @@ class ShoppingCart {
   }
 
   remove(indexId) {
+    toastr.info('Removed ' + this.orderRows[indexId].quantity + ' - ' + this.orderRows[indexId].product.name)
       this.orderRows.splice(indexId, 1);
       // rerender
          // for now render the shopping cart to the footer
