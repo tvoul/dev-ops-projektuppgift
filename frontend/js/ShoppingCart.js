@@ -8,7 +8,6 @@ class ShoppingCart {
 
   add(quantity, product) {
       toastr.success('Added ' + quantity + ' - ' + product.name)
-      // check if the product alread is in the cart
       let found = false;
       for (let orderRow of this.orderRows) {
         if (orderRow.product === product) {
