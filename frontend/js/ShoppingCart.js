@@ -6,13 +6,7 @@ class ShoppingCart {
     this.addEventListener();
   }
 
-  async add(quantity, product) {
-    //check if user is logged in before adding to cart
-    let loggedIn = await (await fetch('/api/login')).json();
-    if (!loggedIn || loggedIn._error) {
-      toastr.error('Log in to add items to your shopping cart')
-    }
-    else{
+  add(quantity, product) {
       toastr.success('Added ' + quantity + ' - ' + product.name)
       // check if the product alread is in the cart
       let found = false;
@@ -36,7 +30,6 @@ class ShoppingCart {
       // for now render the shopping cart to the footer
       document.querySelector('#shoppingCart').innerHTML =
         this.render();
-      }
   }
 
   remove(indexId) {
