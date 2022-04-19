@@ -15,6 +15,7 @@ Given('that I am logged in', async () => {
 
 When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   browser.pause(pauseTime)
+  await browser.url('/');
   let products = await $$('.productInList');
   let foundProduct;
   for (let product of products) {
