@@ -7,8 +7,8 @@ async function getLogInfo() {
   catch (ignore) { }
   if (!loggedIn || loggedIn._error) {
     div.innerHTML = `
-      <a href="/register">Register</a>
-      <a href="/login">Login</a>
+      <a href="/register" id="registerHref">Register</a>
+      <a href="/login" id="loginHref">Login</a>
     `
   }
   else {
