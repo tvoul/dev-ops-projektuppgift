@@ -66,8 +66,6 @@ class Product{
           let product = this.myProductList.products.find(product => product.id === id);
     
           this.myProductList.shoppingCart.add(quantity, product);
-          toastr.success('Added ' + quantity + ' - '+ product.name)
-    
         });
     
         Product.eventListenersAdded = true;
