@@ -36,3 +36,5 @@ Then(/^(\d*) item of "(.*)" should be added to the cart$/, async (quantity, prod
   await expect(tds[1]).toHaveText(productName);
   await tds[0].scrollIntoView();
 });
+
+//trigger actions
