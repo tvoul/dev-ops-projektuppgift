@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6226bc13-58da-495b-8a28-e196f1ca090b",
+		"_postman_id": "f0ee85a6-e732-4f8d-b6bf-0f3531059a1d",
 		"name": "test-customer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -172,6 +172,86 @@
 					"path": [
 						"api",
 						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get all customers as customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check that response code is 405 when visitor tries to access customers\", function(){\r",
+							"    pm.expect(pm.response.code).to.equal(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to update product as user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check that response code is 405 when visitor tries to uppdate product information on product with id: 1\", function(){\r",
+							"    pm.expect(pm.response.code).to.equal(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bromstick\",\r\n    \"description\": \"Nimbus 2022, the finest Bromstick on the market.\",\r\n    \"price\": \"40000\",\r\n    \"img_link\": \"https://pm1.narvii.com/6811/0e5571c84bb32b44e5c7e506b53b74ab64f2ad82v2_hq.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"1"
 					]
 				}
 			},
