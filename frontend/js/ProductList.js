@@ -19,7 +19,7 @@ class ProductList{
 
     render() {
         // Create the variable html - an empty string
-        let html = '<p>Click on a product name to see product details.</p>';
+        let html = '<h2>Click on a product name to see product details.</h2>';
         // Loop through all products and add the html
         // for each product to the html variable
         for (let product of this.products) {

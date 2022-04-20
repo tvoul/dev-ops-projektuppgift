@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.91);
   color: whitesmoke;
 }
 
@@ -14,7 +14,7 @@ th {
 
 tr {
   background-color: white;
-  color: black;
+  color: rgba(0, 0, 0, 0.91);
 }
 
 tbody tr:nth-child(odd){
@@ -35,7 +35,7 @@ th.number, td.number {
 }
 
 form {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   max-width: 500px;
 }
 
@@ -64,7 +64,7 @@ input[type="submit"] {
 }
 
 .register, .login {
-  background-color: rgb(3, 68, 68);
+  background-color: rgb(61, 106, 164);
   position: fixed;
   width: 540px;
   left: calc(50vw - 220px);
@@ -80,7 +80,7 @@ input[type="submit"] {
 }
 
 .register-and-login-links a {
-  color: rgb(20, 166, 182);
+  color: rgb(89, 132, 201);
 }
 
 .hidden {
@@ -98,7 +98,7 @@ input[type="submit"] {
 }
 
 a {
-  color: rgb(20, 166, 182);
+  color: rgb(89, 132, 201);
   text-decoration: none;
 }
 
@@ -120,10 +120,10 @@ li.horizontal{
 
 .productInList {
   border-radius: 10px;
-  margin-bottom: 20px;
-  padding: 10px 20px;
+  margin-bottom: 10px;
+  padding: 20px 20px;
   background-color: rgb(208, 220, 236);
-  color: black;
+  color: rgba(0, 0, 0, 0.884);
 }
 
 .productInList h3 {
@@ -132,32 +132,42 @@ li.horizontal{
 
 .productInList img {
   float: right;
-  width: 200px;
-  max-height: 200px;
+  width: 160px;
+  height: 160px;
+}
+
+.product {
+  border-radius: 10px;
+  padding: 20px 20px;
+  background-color: rgb(208, 220, 236);
+  color: black; 
 }
 
 .product img {
   float: right;
-  width: 40%;
-  margin: 0 20px 40px 20px;
-  background-color: rgb(208, 220, 236);
+  width: 25%;
+  height: 160px;
 }
 
 .backButton {
   cursor: pointer;
   border-radius: 5px;
   padding: 10px 20px;
-  background-color: rgb(42, 135, 65);
+  background-color: rgb(89, 132, 201);
   color: white;
 }
 
 .product .price {
   float: right;
-  margin-top: -10px;
+  margin-top: -0px;
+  font-weight: 900;
 }
 
 .buyButton {
   cursor: pointer;
+  border-radius: 5px;
+  background-color:rgb(89, 132, 201); 
+  
 }
 
 main {
