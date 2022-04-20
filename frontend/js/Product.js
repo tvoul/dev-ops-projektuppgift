@@ -16,10 +16,11 @@ class Product{
     render() {
         return `
           <div class="product" id="i${this.id}">
+          <img src="${this.image}">
             <h3>${this.name}</h3>
-            <img src="${this.image}">
             <div>${this.description}</div>
-              <p class="price">Price: ${this.price} kr</p>
+            <br>
+            <p class="price">Price: ${this.price} kr &emsp; &emsp;</p>
               <form>
                 <input type="number" value="1" class="quantity" min="1" max="100">
                 <button type="submit" class="buyButton">Buy</button>
