@@ -6,17 +6,8 @@ Given('that I can see the product list', async () => {
   await browser.pause(pauseTime);
 });
 
-<<<<<<< HEAD
-Given ('that I can see the product list', async() => { 
-  browser.pause(pauseTime)
-  await browser.url('/')
-})
-
-When(/^I click on the buy button for "(.*)"$/, async (productName) => {
-=======
 When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   await browser.pause(pauseTime);
->>>>>>> parent of 2383377 (Revert "Reverting to when WDIO worked")
   let products = await $$('.productInList');
   let foundProduct;
   for (let product of products) {
@@ -37,11 +28,6 @@ Then(/^(\d*) item of "(.*)" should be added to the cart$/, async (quantity, prod
   await expect(tds[0]).toHaveText(quantity);
   await expect(tds[1]).toHaveText(productName);
   await tds[0].scrollIntoView();
-<<<<<<< HEAD
   await browser.pause(pauseTime);
 });
 
-//trigger actions
-=======
-});
->>>>>>> parent of 2383377 (Revert "Reverting to when WDIO worked")
