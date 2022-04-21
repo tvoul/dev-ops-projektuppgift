@@ -13,9 +13,12 @@ Given('that I am logged in', async () => {
   browser.pause(pauseTime)
 });
 
-When(/^I click on the buy button for "(.*)"$/, async (productName) => {
+Given ('that I can see the product list', async() => { 
   browser.pause(pauseTime)
-  await browser.url('/');
+  await browser.url('/')
+})
+
+When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   let products = await $$('.productInList');
   let foundProduct;
   for (let product of products) {
@@ -35,6 +38,7 @@ Then(/^(\d*) item of "(.*)" should be added to the cart$/, async (quantity, prod
   await expect(tds[0]).toHaveText(quantity);
   await expect(tds[1]).toHaveText(productName);
   await tds[0].scrollIntoView();
+  await browser.pause(pauseTime);
 });
 
 //trigger actions
