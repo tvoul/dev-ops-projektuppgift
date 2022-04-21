@@ -7,36 +7,30 @@ class ShoppingCart {
   }
 
    async add(quantity, product) {
-    //check if user is logged in before adding to cart
-    let loggedIn = await (await fetch('/api/login')).json();
-    if (!loggedIn || loggedIn._error) {
-      toastr.error('Log in to add items to your shopping cart')
+    toastr.success('Added ' + quantity + ' - ' + product.name)
+    // check if the product alread is in the cart
+    let found = false;
+    for (let orderRow of this.orderRows) {
+      if (orderRow.product === product) {
+        // add quantity
+        orderRow.quantity += quantity;
+        found = true;
+      }
     }
-    else{
-      toastr.success('Added ' + quantity + ' - ' + product.name)
-      // check if the product alread is in the cart
-      let found = false;
-      for (let orderRow of this.orderRows) {
-        if (orderRow.product === product) {
-          // add quantity
-          orderRow.quantity += quantity;
-          found = true;
-        }
-      }
 
-      // if the product wasn't in the cart already
-      if (!found) {
-        // Add a new order row
-        this.orderRows.push({
-          quantity,
-          product
-        });
-      }
+    // if the product wasn't in the cart already
+    if (!found) {
+      // Add a new order row
+      this.orderRows.push({
+        quantity,
+        product
+      });
+    }
 
-      // for now render the shopping cart to the footer
-      document.querySelector('#shoppingCart').innerHTML =
-        this.render();
-      }
+    // for now render the shopping cart to the footer
+    document.querySelector('#shoppingCart').innerHTML =
+      this.render(); 
+      
   }
 
   remove(indexId) {
