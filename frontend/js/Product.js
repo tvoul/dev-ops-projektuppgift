@@ -1,5 +1,6 @@
 class Product{
     static eventListenersAdded = false;
+    
     constructor(id, name, price, description, image, myProductList){
         if (!Product.eventListenersAdded) {
             this.addEventListeners();

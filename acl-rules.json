@@ -23,9 +23,8 @@
       "get": true
     },
     "place-my-order": {
-      "post":true
+      "post": true
     },
-
     "edit-my-user-info": {
       "put": true
     }
@@ -44,7 +43,7 @@
       "delete": true
     },
     "place-my-order": {
-      "post":true
+      "post": true
     },
     "orders": {
       "get": true,

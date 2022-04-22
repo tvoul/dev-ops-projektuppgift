@@ -2,12 +2,12 @@ class ShoppingCart {
 
   orderRows = [];
 
-  constructor(){
+  constructor() {
     this.addEventListener();
-   // this.addNavButtonEvents();
+    // this.addNavButtonEvents();
   }
 
-   async add(quantity, product) {
+  async add(quantity, product) {
     toastr.success('Added ' + quantity + ' - ' + product.name)
     // check if the product alread is in the cart
     let found = false;
@@ -30,18 +30,18 @@ class ShoppingCart {
 
     // for now render the shopping cart to the footer
     document.querySelector('#shoppingCart').innerHTML =
-      this.render(); 
-      
+      this.render();
+
   }
 
   remove(indexId) {
     toastr.info('Removed ' + this.orderRows[indexId].quantity + ' - ' + this.orderRows[indexId].product.name)
-      this.orderRows.splice(indexId, 1);
-      // rerender
-         // for now render the shopping cart to the footer
-      document.querySelector('#shoppingCart').innerHTML =
+    this.orderRows.splice(indexId, 1);
+    // rerender
+    // for now render the shopping cart to the footer
+    document.querySelector('#shoppingCart').innerHTML =
       this.render();
-    }
+  }
 
   formatSEK(number) {
     return new Intl.NumberFormat(
@@ -78,32 +78,38 @@ class ShoppingCart {
     return html;
   }
 
-  addEventListener(){
-    listen('click', '#shoppingCart .deleteButton', event =>{
+  addEventListener() {
+    listen('click', '#shoppingCart .deleteButton', event => {
       let button = event.target;
-      let rnd  = button.closest('tr').getAttribute('id')
+      let rnd = button.closest('tr').getAttribute('id')
       let id = rnd.slice(1)
       this.remove(id);
 
     }),
-    listen('click', '.checkout', () => {
-      console.log('click')
-      let reqBody = [];
-      for (let orderRow of this.orderRows){
-        reqBody.push({
-          quantity: orderRow.quantity,
-          productId: orderRow.product.id
-        });
-      }
-      //this part dont work
-      await (await fetch('/api/place-my-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reqBody)
-      })).json();
+      listen('click', '.checkout', async () => {
 
-    });
-  
-    }
-    
+        let reqBody = [];
+        for (let orderRow of this.orderRows) {
+          reqBody.push({
+            quantity: orderRow.quantity,
+            productId: orderRow.product.id
+          });
+        }
+        console.log(reqBody)
+        try {
+          await (await fetch('/api/place-my-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reqBody)
+          })).json();
+        }
+        catch (ignore) { }
+
+        //this part dont work
+
+
+      });
+
   }
+
+}
