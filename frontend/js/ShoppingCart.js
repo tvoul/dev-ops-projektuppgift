@@ -4,6 +4,7 @@ class ShoppingCart {
 
   constructor(){
     this.addEventListener();
+   // this.addNavButtonEvents();
   }
 
    async add(quantity, product) {
@@ -63,7 +64,7 @@ class ShoppingCart {
           <td>${orderRow.product.name}</td>
           <td>à ${this.formatSEK(orderRow.product.price)}</td>
           <td>${this.formatSEK(rowSum)}</td>
-          <td><button type="click" class="deleteButton">X</button></td>
+          <td><button type="submit" class="deleteButton">X</button></td>
         </tr>
       `;
       totalSum += rowSum;
@@ -72,6 +73,7 @@ class ShoppingCart {
     html += `<tr>
       <td colspan="3">Total:</td>
       <td>${this.formatSEK(totalSum)}</td>
+      <td><button type="submit" class="checkout">Pay</button</td>
     </tr>`;
     return html;
   }
@@ -81,10 +83,27 @@ class ShoppingCart {
       let button = event.target;
       let rnd  = button.closest('tr').getAttribute('id')
       let id = rnd.slice(1)
-      console.log(id);
       this.remove(id);
 
-    })
-  }
+    }),
+    listen('click', '.checkout', () => {
+      console.log('click')
+      let reqBody = [];
+      for (let orderRow of this.orderRows){
+        reqBody.push({
+          quantity: orderRow.quantity,
+          productId: orderRow.product.id
+        });
+      }
+      //this part dont work
+      await (await fetch('/api/place-my-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reqBody)
+      })).json();
 
-}
+    });
+  
+    }
+    
+  }

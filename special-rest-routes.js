@@ -12,6 +12,42 @@ module.exports = function (app, runQuery, db) {
 
   });
 
+  module.exports = function (app, runQuery, db) {
+
+    app.post('/api/place-my-orders', (req, res) => {
+
+      // get the id of the logged in user
+      let userId = req.session.user?.id;
+
+      //Read the request.body 
+      //Exepcted to be an array of objects
+      //{product_id:x, num_of_products: Y}
+      let orderRows =req.session.user?.id;
+
+      if(!(orderRows instanceof Array)){
+        res.json({_error:'The request should be an array!'});
+        return;
+      }
+
+      let result = runQuery('place-my-orders', req, null, {userId}, 
+      `INSERT INTO orders(user_id) VALUES (:userId)`
+      );
+
+      let orderId = result.lastInsertRowid;
+
+      for(let orderRow of orderRows){
+        runQuery('place-my-order', req,null,{... orderRow,orderId},
+        `INSERT INTO orderRows (order_id, product_id, quantity) 
+         VALUES (:orderId, :productId, :quantity)`);
+
+      }
+
+      res.json({orderId, status:'Created the order'});
+
+    });
+  }
+  
+  
   function editMyUserInfo(req, res) {
 
     delete req.body.userRole;
@@ -42,4 +78,4 @@ module.exports = function (app, runQuery, db) {
   app.put('/api/edit-my-user-info', editMyUserInfo);
   app.patch('/api/edit-my-user-info', editMyUserInfo);
 
-}
+  }
