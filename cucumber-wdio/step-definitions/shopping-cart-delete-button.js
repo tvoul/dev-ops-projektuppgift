@@ -3,7 +3,9 @@ const pauseTime = 50;
 
 Given(/^that I have put a "(.*)" in my cart$/, async (productName) => {
   await browser.url('/');
-  browser.pause(pauseTime)
+  while (!(await $('.productInList'))) {
+    browser.pause(100);
+  }
   let products = await $$('.productInList');
   let foundProduct;
   for (let product of products) {
@@ -19,13 +21,19 @@ Given(/^that I have put a "(.*)" in my cart$/, async (productName) => {
 });
 
 When(/^I click on the delete button on "(.*)"$/, async (productName) => {
-    let tds = await $$('.shoppingCart tr:first-child td');
-    await tds[4].scrollIntoView();
-    let deleteButton = await tds[4].$('.deleteButton')
-    await deleteButton.click()
+  while (!(await $('.shoppingCart'))) {
+    browser.pause(100);
+  }
+  let tds = await $$('.shoppingCart tr:first-child td');
+  await tds[4].scrollIntoView();
+  let deleteButton = await tds[4].$('.deleteButton')
+  await deleteButton.click()
 });
 
 Then('the total amount due should be 0', async () => {
+  while (!(await $('.shoppingCart'))) {
+    browser.pause(100);
+  }
   let tds = await $$('.shoppingCart tr:first-child td');
   await tds[1].scrollIntoView();
   let total = await tds[1].getText()

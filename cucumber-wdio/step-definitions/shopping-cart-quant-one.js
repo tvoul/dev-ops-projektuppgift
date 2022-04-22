@@ -14,8 +14,12 @@ Given('that I am logged in', async () => {
 });
 
 When(/^I click on the buy button for "(.*)"$/, async (productName) => {
-  browser.pause(pauseTime)
-  await browser.url('/');
+  await browser.url('/'); // why reload page?
+
+  while (!(await $('.productInList'))) {
+    browser.pause(100);
+  }
+
   let products = await $$('.productInList');
   let foundProduct;
   for (let product of products) {
@@ -31,16 +35,12 @@ When(/^I click on the buy button for "(.*)"$/, async (productName) => {
 });
 
 Then(/^(\d*) item of "(.*)" should be added to the cart$/, async (quantity, productName) => {
+  while (!(await $('.shoppingCart'))) {
+    browser.pause(100);
+  }
   let tds = await $$('.shoppingCart tr:first-child td');
+  console.warn("HEPP", tds[0])
   await expect(tds[0]).toHaveText(quantity);
   await expect(tds[1]).toHaveText(productName);
   await tds[0].scrollIntoView();
-<<<<<<< HEAD
-  await browser.pause(pauseTime);
-});
-
-=======
-});
-
-//trigger actions
->>>>>>> parent of 655e4d0 (Reverting to when WDIO worked)
+})
