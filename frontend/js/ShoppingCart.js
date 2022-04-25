@@ -4,7 +4,6 @@ class ShoppingCart {
 
   constructor() {
     this.addEventListener();
-    // this.addNavButtonEvents();
   }
 
   async add(quantity, product) {
