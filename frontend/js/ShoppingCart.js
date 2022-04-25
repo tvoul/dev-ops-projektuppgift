@@ -2,17 +2,17 @@ class ShoppingCart {
 
   orderRows = [];
 
-  constructor(){
+  constructor() {
     this.addEventListener();
   }
 
-   async add(quantity, product) {
+  async add(quantity, product) {
     //check if user is logged in before adding to cart
     let loggedIn = await (await fetch('/api/login')).json();
     if (!loggedIn || loggedIn._error) {
       toastr.error('Log in to add items to your shopping cart')
     }
-    else{
+    else {
       toastr.success('Added ' + quantity + ' - ' + product.name)
       // check if the product alread is in the cart
       let found = false;
@@ -36,17 +36,17 @@ class ShoppingCart {
       // for now render the shopping cart to the footer
       document.querySelector('#shoppingCart').innerHTML =
         this.render();
-      }
+    }
   }
 
   remove(indexId) {
     toastr.info('Removed ' + this.orderRows[indexId].quantity + ' - ' + this.orderRows[indexId].product.name)
-      this.orderRows.splice(indexId, 1);
-      // rerender
-         // for now render the shopping cart to the footer
-      document.querySelector('#shoppingCart').innerHTML =
+    this.orderRows.splice(indexId, 1);
+    // rerender
+    // for now render the shopping cart to the footer
+    document.querySelector('#shoppingCart').innerHTML =
       this.render();
-    }
+  }
 
   formatSEK(number) {
     return new Intl.NumberFormat(
@@ -69,7 +69,7 @@ class ShoppingCart {
           <td>${orderRow.product.name}</td>
           <td>à ${this.formatSEK(orderRow.product.price)}</td>
           <td>${this.formatSEK(rowSum)}</td>
-          <td><button type="click" class="deleteButton">X</button></td>
+          <td><button type="submit" class="deleteButton">X</button></td>
         </tr>
       `;
       totalSum += rowSum;
@@ -78,19 +78,44 @@ class ShoppingCart {
     html += `<tr>
       <td colspan="3">Total:</td>
       <td>${this.formatSEK(totalSum)}</td>
+      <td><button type="submit" class="checkout">Pay</button</td>
     </tr>`;
     return html;
   }
 
-  addEventListener(){
-    listen('click', '#shoppingCart .deleteButton', event =>{
+  addEventListener() {
+    listen('click', '#shoppingCart .deleteButton', event => {
       let button = event.target;
-      let rnd  = button.closest('tr').getAttribute('id')
+      let rnd = button.closest('tr').getAttribute('id')
       let id = rnd.slice(1)
-      console.log(id);
       this.remove(id);
 
-    })
+    }),
+
+      listen('click', '.checkout', async () => {
+
+        let reqBody = [];
+        for (let orderRow of this.orderRows) {
+          reqBody.push({
+            quantity: orderRow.quantity,
+            productId: orderRow.product.id
+          });
+        }
+        console.log(reqBody)
+        try {
+          await (await fetch('/api/place-my-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reqBody)
+          })).json();
+        }
+        catch (ignore) { }
+
+        this.orderRows = [];
+        document.querySelector('#shoppingCart').innerHTML =
+          this.render();
+        toastr.success('Thank you for your order!');
+      })
   }
 
 }

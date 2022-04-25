@@ -22,6 +22,9 @@
     "my-orders": {
       "get": true
     },
+    "place-my-order": {
+      "post": true
+    },
     "edit-my-user-info": {
       "put": true
     }
@@ -38,6 +41,9 @@
       "post": true,
       "put": true,
       "delete": true
+    },
+    "place-my-order": {
+      "post": true
     },
     "orders": {
       "get": true,
