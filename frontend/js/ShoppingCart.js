@@ -69,7 +69,7 @@ class ShoppingCart {
           <td>${orderRow.product.name}</td>
           <td>à ${this.formatSEK(orderRow.product.price)}</td>
           <td>${this.formatSEK(rowSum)}</td>
-          <td><button type="click" class="deleteButton">X</button></td>
+          <td><button type="submit" class="deleteButton">X</button></td>
         </tr>
       `;
       totalSum += rowSum;
