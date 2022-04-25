@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e0e4c12e-f1f1-4c84-88cd-5a5069b8fb5d",
+		"_postman_id": "43e66c25-588a-4743-8d58-9e570694fc39",
 		"name": "test-visitor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -114,6 +114,41 @@
 			"response": []
 		},
 		{
+			"name": "Try to get customers as visitor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check that response code is 405 when visitor tries to access customers\", function(){\r",
+							"    pm.expect(pm.response.code).to.equal(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create product as visitor",
 			"event": [
 				{
@@ -164,6 +199,87 @@
 					"path": [
 						"api",
 						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to delete product as visitor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check that response code is 405 when visitor tries to delete product on id 1\", function(){\r",
+							"    pm.expect(pm.response.code).to.equal(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to update product as visitor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check that response code is 405 when visitor tries to uppdate product information on product with id: 1\", function(){\r",
+							"    pm.expect(pm.response.code).to.equal(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bromstick\",\r\n    \"description\": \"Nimbus 2022, the finest Bromstick on the market.\",\r\n    \"price\": \"40000\",\r\n    \"img_link\": \"https://pm1.narvii.com/6811/0e5571c84bb32b44e5c7e506b53b74ab64f2ad82v2_hq.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"1"
 					]
 				}
 			},
