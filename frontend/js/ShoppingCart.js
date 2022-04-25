@@ -6,14 +6,13 @@ class ShoppingCart {
     this.addEventListener();
   }
 
-
-   async add(quantity, product) {
+  async add(quantity, product) {
     //check if user is logged in before adding to cart
     let loggedIn = await (await fetch('/api/login')).json();
     if (!loggedIn || loggedIn._error) {
       toastr.error('Log in to add items to your shopping cart')
     }
-    else{
+    else {
       toastr.success('Added ' + quantity + ' - ' + product.name)
       // check if the product alread is in the cart
       let found = false;
@@ -23,22 +22,21 @@ class ShoppingCart {
           orderRow.quantity += quantity;
           found = true;
         }
-
-        // if the product wasn't in the cart already
-        if (!found) {
-          // Add a new order row
-          this.orderRows.push({
-            quantity,
-            product
-          });
-        }
       }
 
+      // if the product wasn't in the cart already
+      if (!found) {
+        // Add a new order row
+        this.orderRows.push({
+          quantity,
+          product
+        });
+      }
 
       // for now render the shopping cart to the footer
       document.querySelector('#shoppingCart').innerHTML =
         this.render();
-      }
+    }
   }
 
   remove(indexId) {
@@ -71,7 +69,7 @@ class ShoppingCart {
           <td>${orderRow.product.name}</td>
           <td>à ${this.formatSEK(orderRow.product.price)}</td>
           <td>${this.formatSEK(rowSum)}</td>
-          <td><button type="submit" class="deleteButton">X</button></td>
+          <td><button type="click" class="deleteButton">X</button></td>
         </tr>
       `;
       totalSum += rowSum;
@@ -93,6 +91,7 @@ class ShoppingCart {
       this.remove(id);
 
     }),
+
       listen('click', '.checkout', async () => {
 
         let reqBody = [];
@@ -112,11 +111,11 @@ class ShoppingCart {
         }
         catch (ignore) { }
 
-        //this part dont work
-
-
-      });
-
+        this.orderRows = [];
+        document.querySelector('#shoppingCart').innerHTML =
+          this.render();
+        toastr.success('Thank you for your order!');
+      })
   }
 
 }
