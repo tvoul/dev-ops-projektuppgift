@@ -3,7 +3,7 @@ Feature: Shopping cart
     and remove products while deciding what to buy
 
     Scenario: Click a buy button
-        Given that I can see the product list
+        Given that I am logged in
         When I click on the buy button for "Invisibility Cloak"
         Then 1 item of "Invisibility Cloak" should be added to the cart
 
