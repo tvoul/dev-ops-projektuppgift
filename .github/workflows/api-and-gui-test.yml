@@ -30,6 +30,7 @@ jobs:
     - run: npm ci
       # run the npm build command (not used in our project)
     - run: npm run build --if-present
+    - run: npm test
       # install pm2
     - run: npm install -g pm2
       # run our Node.js based server/backend/REST-api using pm2
