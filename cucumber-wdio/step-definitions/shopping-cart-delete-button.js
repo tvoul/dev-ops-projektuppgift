@@ -35,6 +35,9 @@ Then('the total amount due should be 0', async () => {
     browser.pause(100);
   }
   let tds = await $$('.shoppingCart tr:first-child td');
+  while (!(await tds)) {
+    browser.pause(100);
+  }
   await tds[1].scrollIntoView();
   let total = await tds[1].getText()
   await expect(total).toBe('0,00 kr')
