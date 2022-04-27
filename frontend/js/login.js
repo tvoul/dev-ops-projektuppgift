@@ -1,6 +1,7 @@
 function renderLoginForm(retry = false) {
   return `
     <form name="login">
+    <button class="closeLoginForm">x</button>
       <h1>Login</h1>
       ${!retry ? '' : `<p class="error">Something went wrong. Please try again!</p>`}
       <label>

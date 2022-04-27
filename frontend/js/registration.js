@@ -1,5 +1,7 @@
 function renderRegistrationForm() {
   return `
+  <div class="registerModal modal">
+    <button class="closeRegisterForm">x</button>
     <h1>Register</h1>
     <form name="registration">
       <label>
@@ -19,8 +21,10 @@ function renderRegistrationForm() {
       </label>
       <input type="submit" value="Register">
     </form>
+    </div>
   `;
 }
+
 
 document.querySelector('body').addEventListener('submit', async (event) => {
 
@@ -80,3 +84,6 @@ document.querySelector('body').addEventListener('click', (event) => {
   registerDiv.classList.remove('hidden');
   document.querySelector('.modal-hider').classList.remove('hidden');
 });
+
+
+
