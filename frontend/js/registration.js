@@ -64,8 +64,8 @@ document.querySelector('body').addEventListener('submit', async (event) => {
   }
 
   document.querySelector('.register').innerHTML = `
-    <h3>Welcome as a member!</h3>
-    <p>You are now successfully registrered as a member!</p>
+    <h3>Welcome as a customer!</h3>
+    <p>You are now successfully registered. Have a magical time shopping!</p>
   `;
 });
 
