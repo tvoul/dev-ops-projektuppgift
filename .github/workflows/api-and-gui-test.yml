@@ -1,4 +1,4 @@
-name: Rest-api and WebDriverIO tests
+name: Unit, rest-api and gui tests
 
 #Run this for all pushes and on pull request to dev and main
 on:
@@ -9,8 +9,8 @@ on:
 
 jobs:
   
-  ### Run api-tests with newman
-  api-tests:
+  # Run unit, rest-api and gui tests
+  unit-api-gui-tests:
 
     runs-on: ubuntu-latest # on an ubuntu server
     strategy:
@@ -30,10 +30,11 @@ jobs:
     - run: npm ci
       # run the npm build command (not used in our project)
     - run: npm run build --if-present
+      # run unit tests
     - run: npm test
       # install pm2
     - run: npm install -g pm2
-      # run our Node.js based server/backend/REST-api using pm2
+      # run our Node.js based server using pm2
     - run: pm2 start index.js
       # install Newman
     - run: npm install -g newman
@@ -41,8 +42,8 @@ jobs:
     - run: newman run test-rest-api/test-visitor.postman_collection.json
     - run: newman run test-rest-api/test-customer.postman_collection.json
     - run: newman run test-rest-api/test-admin.postman_collection.json
-    # Install Chrome
+    # install Chrome
     - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
-    ### Run the WebDriverIO tests
+    # run the WebDriverIO tests
     - run: HEADLESS_CHROME=yes npm run wdio
