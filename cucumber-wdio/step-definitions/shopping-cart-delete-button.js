@@ -8,12 +8,13 @@ Given(/^that I have put a "(.*)" in my cart$/, async (productName) => {
   }
   let products = await $$('.productInList');
   let foundProduct;
-  for (let product of products) {
-    if ((await product.getText()).includes(productName)) {
-      foundProduct = product;
+  while (typeof foundProduct === 'undefined'){
+    for (let product of products) {
+      if ((await product.getText()).includes(productName)) {
+        foundProduct = product;
+      }
     }
   }
-  browser.pause(pauseTime)
   expect(foundProduct).toBeTruthy();
   let buyButton = await foundProduct.$('.buyButton');
   await buyButton.scrollIntoView();

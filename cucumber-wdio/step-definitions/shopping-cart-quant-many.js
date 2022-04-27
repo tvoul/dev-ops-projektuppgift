@@ -13,9 +13,11 @@ When(/^I change the form to (\d*) and click buy on "(.*)"$/, async (quantity, pr
   }
   let products = await $$('.productInList');
   let foundProduct;
-  for (let product of products) {
-    if ((await product.getText()).includes(productName)) {
-      foundProduct = product;
+  while (typeof foundProduct === 'undefined'){
+    for (let product of products) {
+      if ((await product.getText()).includes(productName)) {
+        foundProduct = product;
+      }
     }
   }
   expect(foundProduct).toBeTruthy();
