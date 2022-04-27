@@ -8,7 +8,7 @@ Given('that I can see the products list', async () => {
 When(/^I change the form to (\d*) and click buy on "(.*)"$/, async (quantity, productName) => {
   browser.pause(pauseTime)
   await browser.url('/');
-  while (!(await $('.productInList'))) {
+  while (!(await $$('.productInList'))) {
     browser.pause(100);
   }
   let products = await $$('.productInList');
