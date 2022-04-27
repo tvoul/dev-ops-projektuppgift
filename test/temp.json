@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "Wooden Wand",
+        "description": "Wand made with oak wood infuced with a phoenix feather from the first pheonix bird.",
+        "price": 230,
+        "img_link": "https://th.bing.com/th/id/R.6fa1df3f2b009f624705da1fcae7212e?rik=SlgBQHkjZLvwhg&riu=http%3a%2f%2fdlp2gfjvaz867.cloudfront.net%2fproduct_photos%2f43711343%2foak-aug16-1234th-02_original.jpg&ehk=umkHck7ISbiJnBtXLACE%2bxWOfOsS6WaCFHdmxlfZN6k%3d&risl=&pid=ImgRaw&r=0"
+    },
+    {
+        "id": 2,
+        "name": "Invisibility Cloak",
+        "description": "A cloak that makes you disapare",
+        "price": 2050,
+        "img_link": "https://th.bing.com/th/id/R.7a2d5ac2de36f126240ed08805cea0c4?rik=IRpcZHLBcvk7gw&riu=http%3a%2f%2fwww.shutupandtakemymoney.com%2fwp-content%2fuploads%2f2012%2f11%2fInvisibility-Cloak.jpg&ehk=%2fmvCvITivSTbTe46D%2fICS5KA4DbrgJo8Pfw5P%2b6gFxo%3d&risl=&pid=ImgRaw&r=0"
+    },
+    {
+        "id": 3,
+        "name": "Bat's Blood",
+        "description": "Blood that comes from the bats in the deepest caves of Canada",
+        "price": 45,
+        "img_link": "https://particle.azureedge.net/app/uploads/2018/04/vapire-bats-feed-blood-666x400-c-center.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Fenny Snake Fillet",
+        "description": "Fillet from Fenny snake from the swampy district of eastern England.",
+        "price": 230,
+        "img_link": "https://64.media.tumblr.com/8d09889ff0d597b9fed2199166a8e0ef/tumblr_inline_oyhsewXGRc1sj9kc6_540.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Creatures of darkness - Book",
+        "description": "A book about the creatures of darkness, whriten by the amazing Linguin Lupini",
+        "price": 325,
+        "img_link": "https://m.media-amazon.com/images/I/41nTacQvhZL._AC_SY1000_.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Dragon Egg",
+        "description": "Dragon eggs are large eggs with tiny scales, which shimmer like polished metal in the sunlight. Dragon eggs come in a variety of rich colors.",
+        "price": 1250,
+        "img_link": "https://www.punishedprops.com/wp-content/uploads/2019/04/egg_5-1024x683.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Blizzard Potion",
+        "description": "The best elixir to drink right before combat, gives you extra power for dangerous situations.",
+        "price": 225,
+        "img_link": "http://custom-gwent.com/cardsBg/3398713ba2d6aa98194f60247e3e4564.jpeg"
+    },
+    {
+        "id": 8,
+        "name": "Crystal Ball",
+        "description": "A crystal ball, also known as an orbuculum or crystal sphere, is a crystal or glass ball and common fortune-telling object. It is generally associated with the performance of clairvoyance and scrying in particular.",
+        "price": 1599,
+        "img_link": "https://img.ltwebstatic.com/images3_pi/2021/08/27/16300598731684de751f2129868bd80604f5f83255_thumbnail_900x.webp"
+    }
+]

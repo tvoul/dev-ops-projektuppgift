@@ -1,4 +1,3 @@
-
 async function getData(restRoute) {
   let rawData = await fetch(restRoute);
   let result = await rawData.json();
@@ -44,14 +43,14 @@ async function reactOnUserSelectChoices(event) {
 
 async function start(userRole) {
   
-  if (userRole === 'user' && window.location.pathname == '/user.html'){
-    document.querySelector('main').innerHTML = '<h1>You are logged in, showing your orders</h1>'
+  if (userRole === 'user'){
+    document.querySelector('#user').innerHTML = '<h1>Order history</h1>'
     let selectData = (await getData('/api/my-orders'))
     selectData.unshift('table: my-orders');
     renderSelectBox('.data-table', selectData, reactOnUserSelectChoices);
   }
-  else if(userRole === 'superadmin'  && window.location.pathname == '/user.html'){
-    document.querySelector('main').innerHTML = '<h1>Admin view</h1>'
+  else if(userRole === 'superadmin'){
+    document.querySelector('#user').innerHTML = '<h1>Admin view</h1>'
     let selectData = (await getData('/api/tablesAndViews'))
     .map(item => item.type + ': ' + item.name).sort()
     .filter(x => x !== 'table: customers');
@@ -59,3 +58,5 @@ async function start(userRole) {
     renderSelectBox('.select-holder', selectData, reactOnUserSelectChoices);
   }
 }
+
+new ProductList()

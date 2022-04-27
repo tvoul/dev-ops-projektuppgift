@@ -1,12 +1,6 @@
 {
   "visitor": {
-    "authors": {
-      "get": true
-    },
-    "books": {
-      "get": true
-    },
-    "booksWithAuthors": {
+    "products": {
       "get": true
     },
     "login": {
@@ -15,16 +9,13 @@
     },
     "customers": {
       "post": true
+    },
+    "place-my-order":{
+      "post":false
     }
   },
   "user": {
-    "authors": {
-      "get": true
-    },
-    "books": {
-      "get": true
-    },
-    "booksWithAuthors": {
+    "products": {
       "get": true
     },
     "login": {
@@ -34,24 +25,15 @@
     "my-orders": {
       "get": true
     },
+    "place-my-order": {
+      "post": true
+    },
     "edit-my-user-info": {
       "put": true
     }
   },
   "superadmin": {
-    "authors": {
-      "get": true,
-      "post": true,
-      "put": true,
-      "delete": true
-    },
-    "authorsXbooks": {
-      "get": true,
-      "post": true,
-      "put": true,
-      "delete": true
-    },
-    "books": {
+    "products": {
       "get": true,
       "post": true,
       "put": true,
@@ -63,20 +45,20 @@
       "put": true,
       "delete": true
     },
+    "place-my-order": {
+      "post": true
+    },
     "orders": {
       "get": true,
       "post": true,
       "put": true,
       "delete": true
     },
-    "ordersXbooks": {
+    "ordersXproducts": {
       "get": true,
       "post": true,
       "put": true,
       "delete": true
-    },
-    "booksWithAuthors": {
-      "get": true
     },
     "orderDetails": {
       "get": true

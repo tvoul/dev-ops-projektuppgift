@@ -4,12 +4,12 @@ function renderLoginForm(retry = false) {
       <h1>Login</h1>
       ${!retry ? '' : `<p class="error">Something went wrong. Please try again!</p>`}
       <label>
-        <span>Email:</span><input required type="email" name="email">
+        <span>Email:</span><input required type="email" name="email" id="email">
       </label>
        <label>
-        <span>Password:</span><input required type="password" name="password">
+        <span>Password:</span><input required type="password" name="password" id="password">
       </label>
-      <input type="submit" value="Log in">
+      <input type="submit" value="Log in" id="loginBtn">
     </form>
   `;
 }
@@ -44,8 +44,7 @@ document.querySelector('body').addEventListener('submit', async (event) => {
     return;
   }
 
-  //location.reload();
-  window.location.href = './user.html'
+  window.location.href = './index.html'
 
 });
 
