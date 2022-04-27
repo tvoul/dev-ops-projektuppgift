@@ -1,6 +1,5 @@
 function renderRegistrationForm() {
   return `
-  <div class="registerModal modal">
     <button class="closeRegisterForm">x</button>
     <h1>Register</h1>
     <form name="registration">
@@ -21,7 +20,6 @@ function renderRegistrationForm() {
       </label>
       <input type="submit" value="Register">
     </form>
-    </div>
   `;
 }
 
