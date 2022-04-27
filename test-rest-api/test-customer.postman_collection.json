@@ -48,7 +48,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var mockResp = {\"id\":1,\"email\":\"user@gmail.com\",\"firstName\":\"Brewer\",\"lastName\":\"McKibbin\",\"userRole\":\"user\"}",
+							"var mockResp = {\"id\":1,\"email\":\"user@gmail.com\",\"firstName\":\"Myrtle Elizabeth\",\"lastName\":\"Warren\",\"userRole\":\"user\"}",
 							"let response = pm.response.json()",
 							"",
 							"pm.test('Check that i was able to log in', () => {",
