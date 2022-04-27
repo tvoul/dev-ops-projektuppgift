@@ -8,14 +8,16 @@ Given('that I can see the products list', async () => {
 When(/^I change the form to (\d*) and click buy on "(.*)"$/, async (quantity, productName) => {
   browser.pause(pauseTime)
   await browser.url('/');
-  while (!(await $('.productInList'))) {
+  while (!(await $$('.productInList'))) {
     browser.pause(100);
   }
   let products = await $$('.productInList');
   let foundProduct;
-  for (let product of products) {
-    if ((await product.getText()).includes(productName)) {
-      foundProduct = product;
+  while (typeof foundProduct === 'undefined'){
+    for (let product of products) {
+      if ((await product.getText()).includes(productName)) {
+        foundProduct = product;
+      }
     }
   }
   expect(foundProduct).toBeTruthy();

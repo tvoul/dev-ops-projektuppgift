@@ -149,6 +149,49 @@
 			"response": []
 		},
 		{
+			"name": "Place a order as visitor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body contains string\",() => {\r",
+							"  pm.expect(pm.response.text()).to.not.include(\"orderId\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n    \"order_id\":\"5\",\r\n    \"product_id\":\"1\",\r\n    \"num_of_products\":\"3\"\r\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/place-my-order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"place-my-order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create product as visitor",
 			"event": [
 				{
