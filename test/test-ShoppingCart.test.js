@@ -45,12 +45,6 @@ describe('Test the shopping cart', () => {
 
         await myShoppingCart.add(5, cartProduct);
 
-        // Check that the constructor really sets the correct property values
-        expect(cartProduct.id).toBe(1);
-        expect(cartProduct.name).toBe('Fork');
-        expect(cartProduct.price).toBe(19);
-        expect(cartProduct.description).toBe('Rare fork.');
-
     });
 
     test('A row with a product is expected to be added to shopping cart', () => {
