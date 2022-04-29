@@ -8,12 +8,13 @@ Given(/^that I have put a "(.*)" in my cart$/, async (productName) => {
   }
   let products = await $$('.productInList');
   let foundProduct;
-  for (let product of products) {
-    if ((await product.getText()).includes(productName)) {
-      foundProduct = product;
+  while (typeof foundProduct === 'undefined'){
+    for (let product of products) {
+      if ((await product.getText()).includes(productName)) {
+        foundProduct = product;
+      }
     }
   }
-  browser.pause(pauseTime)
   expect(foundProduct).toBeTruthy();
   let buyButton = await foundProduct.$('.buyButton');
   await buyButton.scrollIntoView();
@@ -35,6 +36,9 @@ Then('the total amount due should be 0', async () => {
     browser.pause(100);
   }
   let tds = await $$('.shoppingCart tr:first-child td');
+  while (!(await tds)) {
+    browser.pause(100);
+  }
   await tds[1].scrollIntoView();
   let total = await tds[1].getText()
   await expect(total).toBe('0,00 kr')

@@ -9,6 +9,9 @@
     },
     "customers": {
       "post": true
+    },
+    "place-my-order":{
+      "post":false
     }
   },
   "user": {
