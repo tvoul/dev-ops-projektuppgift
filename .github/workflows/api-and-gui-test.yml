@@ -61,4 +61,6 @@ jobs:
     - run: npm ci
     - run: npm install -g pm2
     - run: pm2 start backend/index.js
+    - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - run: sudo apt install ./google-chrome-stable_current_amd64.deb
     - run: HEADLESS_CHROME=yes npm run wdio
