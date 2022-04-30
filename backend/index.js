@@ -22,5 +22,5 @@ setupRESTapi(app, db);
 app.all('*', (req, res) => {
   res.status(404);
   res.set('Content-Type', 'text/html');
-  res.sendFile(path.join(__dirname, 'frontend', '404.html'));
+  res.sendFile(path.join(__dirname, '../frontend', '404.html'));
 });
