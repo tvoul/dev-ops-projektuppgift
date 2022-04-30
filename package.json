@@ -4,6 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "start": "node backend/index.js",
         "test": "jest",
         "wdio": "wdio run wdio.conf.js"
     },
