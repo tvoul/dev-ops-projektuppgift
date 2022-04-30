@@ -2,7 +2,7 @@ name: Unit, rest-api and gui tests
 
 on:
   push:
-    branches: [dev, main]
+    branches: [dev, main, feature-cont-deployment]
   pull_request: 
     branches: [dev, main]
 
@@ -38,6 +38,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - run: mv database/feature.db database/shop.db
     - run: npm install -g pm2
     - run: pm2 start backend/index.js
     - run: npm install -g newman
@@ -59,6 +60,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - run: mv database/feature.db database/shop.db
     - run: npm install -g pm2
     - run: pm2 start backend/index.js
     - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
