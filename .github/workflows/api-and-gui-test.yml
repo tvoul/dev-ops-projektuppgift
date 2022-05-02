@@ -71,14 +71,15 @@ jobs:
   deploy:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
+    steps:
+    - uses: appleboy/ssh-action@v0.1.4
     - name: SSH Remote Commands
-    uses: appleboy/ssh-action@v0.1.4
-    with:
-      host: ${{ADDRESS}}
-      username: root
-      key: ${{AWS_DEVOPS}}
-      port: ${{PORT}}
-      script: |
-        cd dev-branch
-        git pull origin dev
-        pm2 restart dev
+      with:
+        host: ${{ADDRESS}}
+        username: root
+        key: ${{AWS_DEVOPS}}
+        port: ${{PORT}}
+        script: |
+          cd dev-branch
+          git pull origin dev
+          pm2 restart dev
