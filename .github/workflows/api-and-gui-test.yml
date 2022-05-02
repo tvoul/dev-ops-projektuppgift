@@ -2,9 +2,10 @@ name: Unit, rest-api and gui tests
 
 on:
   push:
-    branches: [dev, main]
-  pull_request: 
-    branches: [dev, main]
+    branches: [dev]
+    #branches: [dev, main]
+  #pull_request: 
+    #branches: [dev, main]
 
 jobs:
 
@@ -66,3 +67,17 @@ jobs:
     - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
     - run: HEADLESS_CHROME=yes npm run wdio
+  
+  deploy:
+    needs: [unit-tests, api-tests, gui-tests]
+    runs-on: ubuntu-latest
+    uses: appleboy/ssh-action@v0.1.4
+    with:
+      host: ${{ADDRESS}}
+      username: root
+      key: ${{AWS_DEVOPS}}
+      port: ${{PORT}}
+      script: |
+        cd dev-branch
+        git pull origin dev
+        pm2 restart dev
