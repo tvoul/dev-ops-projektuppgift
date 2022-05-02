@@ -30,7 +30,6 @@ When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   }
   expect(foundProduct).toBeTruthy();
   let buyButton = await foundProduct.$('.buyButton');
-  await buyButton.scrollIntoView();
   await buyButton.click();
 });
 
@@ -42,5 +41,4 @@ Then(/^(\d*) item of "(.*)" should be added to the cart$/, async (quantity, prod
   console.warn("HEPP", tds[0])
   await expect(tds[0]).toHaveText(quantity);
   await expect(tds[1]).toHaveText(productName);
-  await tds[0].scrollIntoView();
 })
