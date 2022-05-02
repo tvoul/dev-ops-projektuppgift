@@ -70,7 +70,7 @@ jobs:
 
   go-live:
     #needs: [unit-tests, api-tests, gui-tests]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - name: Configure SSH
