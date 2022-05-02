@@ -80,7 +80,7 @@ jobs:
           cat >>~/.ssh/config <<END
           Host dev
             HostName $ADDRESS
-            User $USER
+            User root
             Port $PORT
             IdentityFile ~/.ssh/dev.key
             StrictHostKeyChecking no
