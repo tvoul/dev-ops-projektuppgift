@@ -91,7 +91,7 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}          
 
       - name: Deploy from main
-        run: ssh main 'cd main-branch/ && git fetch && git pull origin dev && npm install'
+        run: ssh main 'cd main-branch/ && git fetch && git pull origin main && npm install'
 
       - name: Restart app
         run: ssh main 'pm2 restart main'  
