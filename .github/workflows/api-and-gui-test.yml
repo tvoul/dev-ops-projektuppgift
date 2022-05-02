@@ -72,7 +72,6 @@ jobs:
     #needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
@@ -93,7 +92,7 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}          
 
       - name: Deploy from dev
-        run: ssh dev 'cd /dev-branch && git fetch && git pull origin dev && npm install'
+        run: ssh dev 'cd dev-branch/ && git fetch && git pull origin dev && npm install'
 
       - name: Restart app
         run: ssh dev 'pm2 restart dev'  
