@@ -72,16 +72,27 @@ jobs:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 
-    - name: SSH Remote Commands
-      uses: appleboy/ssh-action@v0.1.4
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/dev.key
+          chmod 600 ~/.ssh/dev.key
+          cat >>~/.ssh/config <<END
+          Host dev
+            HostName $SSH_HOST
+            User $SSH_USER
+            Port $SSH_PORT
+            IdentityFile ~/.ssh/dev.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_KEY: ${{ secrets.AWS_DEVOPS }}
+          SSH_HOST: ${{ secrets.ADDRESS }}
+          SSH_USER: ${{ secrets.USER }}
+          SSH_PORT: ${{ secrets.PORT }}          
 
-      with:
-        host: ${{ADDRESS}}
-        username: root
-        key: ${{AWS_DEVOPS}}
-        port: ${{PORT}}
-        script: |
-          cd dev-branch
-          git pull origin dev
-          pm2 restart dev
+      - name: Deploy from dev
+        run: ssh dev 'cd dev-branch/ && git fetch && git origin dev'
+
+      - name: Restart app
+        run: ssh dev 'pm2 restart dev'
