@@ -1,6 +1,6 @@
 const path = require('path');
 const betterSqlite3 = require('better-sqlite3');
-const db = betterSqlite3('./database/shop.db');
+const db = betterSqlite3('./backend/database/shop.db');
 const port = process.env.PORT || 3000;
 const express = require('express');
 
@@ -22,5 +22,5 @@ setupRESTapi(app, db);
 app.all('*', (req, res) => {
   res.status(404);
   res.set('Content-Type', 'text/html');
-  res.sendFile(path.join(__dirname, 'frontend', '404.html'));
+  res.sendFile(path.join(__dirname, '../frontend', '404.html'));
 });

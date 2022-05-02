@@ -1,6 +1,5 @@
 name: Unit, rest-api and gui tests
 
-#Run this for all pushes and on pull request to dev and main
 on:
   push:
     branches: [dev, main]
@@ -8,42 +7,62 @@ on:
     branches: [dev, main]
 
 jobs:
-  
-  # Run unit, rest-api and gui tests
-  unit-api-gui-tests:
 
-    runs-on: ubuntu-latest # on an ubuntu server
+  unit-tests:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x] # with Node.js 14.x
-  
+        node-version: [16.x]
+    
     steps:
-      # install node
     - uses: actions/checkout@v2 
-      # checkout repo
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      # install npm modules (using ci, instead of i)
     - run: npm ci
-      # run the npm build command (not used in our project)
-    - run: npm run build --if-present
-      # run unit tests
     - run: npm test
-      # install pm2
+  
+  api-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v2 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: mv backend/database/template.db backend/database/shop.db
     - run: npm install -g pm2
-      # run our Node.js based server using pm2
-    - run: pm2 start index.js
-      # install Newman
+    - run: pm2 start backend/index.js
     - run: npm install -g newman
-      # run our test collection using Newman
     - run: newman run test-rest-api/test-visitor.postman_collection.json
     - run: newman run test-rest-api/test-customer.postman_collection.json
     - run: newman run test-rest-api/test-admin.postman_collection.json
-    # install Chrome
+  
+  gui-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v2 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: mv backend/database/template.db backend/database/shop.db
+    - run: npm install -g pm2
+    - run: pm2 start backend/index.js
     - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
-    # run the WebDriverIO tests
     - run: HEADLESS_CHROME=yes npm run wdio

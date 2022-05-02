@@ -19,10 +19,9 @@ When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   while (!(await $('.productInList'))) {
     browser.pause(100);
   }
-
-  let products = await $$('.productInList');
   let foundProduct;
   while (typeof foundProduct === 'undefined'){
+    let products = await $$('.productInList');
     for (let product of products) {
       if ((await product.getText()).includes(productName)) {
         foundProduct = product;
