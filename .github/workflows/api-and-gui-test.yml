@@ -70,8 +70,9 @@ jobs:
 
   go-live:
     #needs: [unit-tests, api-tests, gui-tests]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
