@@ -71,6 +71,7 @@ jobs:
   deploy:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
+    - name: SSH Remote Commands
     uses: appleboy/ssh-action@v0.1.4
     with:
       host: ${{ADDRESS}}
