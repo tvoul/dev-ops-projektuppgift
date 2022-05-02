@@ -67,7 +67,7 @@ jobs:
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
     - run: HEADLESS_CHROME=yes npm run wdio
 
-  go-live:
+  publish:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
     steps:

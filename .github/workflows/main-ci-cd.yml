@@ -67,21 +67,21 @@ jobs:
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
     - run: HEADLESS_CHROME=yes npm run wdio
 
-  go-live:
+  publish:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/dev.key
-          chmod 600 ~/.ssh/dev.key
+          echo "$SSH_KEY" > ~/.ssh/main.key
+          chmod 600 ~/.ssh/main.key
           cat >>~/.ssh/config <<END
-          Host dev
+          Host main
             HostName $SSH_HOST
             User $SSH_USER
             Port $SSH_PORT
-            IdentityFile ~/.ssh/dev.key
+            IdentityFile ~/.ssh/main.key
             StrictHostKeyChecking no
           END
         env:
@@ -90,8 +90,8 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}          
 
-      - name: Deploy from dev
-        run: ssh dev 'cd main-branch/ && git fetch && git pull origin main && npm install'
+      - name: Deploy from main
+        run: ssh main 'cd main-branch/ && git fetch && git pull origin main && npm install'
 
       - name: Restart app
-        run: ssh dev 'pm2 restart main'  
+        run: ssh main 'pm2 restart main'  
