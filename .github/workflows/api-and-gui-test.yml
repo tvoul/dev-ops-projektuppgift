@@ -67,13 +67,16 @@ jobs:
     - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
     - run: HEADLESS_CHROME=yes npm run wdio
-  
-  deploy:
+
+  go-live:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
+    
     steps:
-    - uses: appleboy/ssh-action@v0.1.4
+    - uses: actions/checkout@v2 
     - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.4
+
       with:
         host: ${{ADDRESS}}
         username: root
