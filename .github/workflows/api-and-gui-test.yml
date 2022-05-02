@@ -93,7 +93,7 @@ jobs:
 
       - name: Deploy from dev
         run: cat /home/runner/.ssh/config
-        #run: ssh dev 'cd ~/dev-branch && git fetch && git pull origin dev && npm install'
+        run: ssh dev 'cd ~/dev-branch && git fetch && git pull origin dev && npm install'
 
       - name: Restart app
         run: ssh dev 'pm2 restart dev'
