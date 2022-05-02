@@ -1,4 +1,4 @@
-name: Unit, rest-api and gui tests
+name: DEV - Unit, rest-api and gui tests
 
 on:
   push:
