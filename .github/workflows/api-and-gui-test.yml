@@ -75,13 +75,13 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/dev.key
+          echo "$AWS_DEVOPS" > ~/.ssh/dev.key
           chmod 600 ~/.ssh/dev.key
           cat >>~/.ssh/config <<END
           Host dev
-            HostName $SSH_HOST
-            User $SSH_USER
-            Port $SSH_PORT
+            HostName $ADDRESS
+            User $USER
+            Port $PORT
             IdentityFile ~/.ssh/dev.key
             StrictHostKeyChecking no
           END
@@ -92,7 +92,7 @@ jobs:
           SSH_PORT: ${{ secrets.PORT }}          
 
       - name: Deploy from dev
-        run: ssh dev 'cd dev-branch/ && git fetch && git origin dev'
+        run: ssh dev 'cd dev-branch/ && git fetch && git pull origin dev'
 
       - name: Restart app
         run: ssh dev 'pm2 restart dev'
