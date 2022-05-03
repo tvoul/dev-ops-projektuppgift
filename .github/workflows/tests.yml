@@ -1,10 +1,10 @@
-name: MAIN - Unit, rest-api and gui tests
+name: Unit, rest-api and gui tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request: 
-    branches: [main]
+    branches: [main, dev]
 
 jobs:
 
@@ -66,32 +66,3 @@ jobs:
     - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - run: sudo apt install ./google-chrome-stable_current_amd64.deb
     - run: HEADLESS_CHROME=yes npm run wdio
-
-  publish:
-    needs: [unit-tests, api-tests, gui-tests]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/main.key
-          chmod 600 ~/.ssh/main.key
-          cat >>~/.ssh/config <<END
-          Host main
-            HostName $SSH_HOST
-            User $SSH_USER
-            Port $SSH_PORT
-            IdentityFile ~/.ssh/main.key
-            StrictHostKeyChecking no
-          END
-        env:
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}          
-
-      - name: Deploy from main
-        run: ssh main 'cd main-branch/ && git fetch && git pull origin main && npm install'
-
-      - name: Restart app
-        run: ssh main 'pm2 restart main'  
