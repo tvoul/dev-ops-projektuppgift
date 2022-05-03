@@ -19,10 +19,9 @@ When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   while (!(await $('.productInList'))) {
     browser.pause(100);
   }
-
-  let products = await $$('.productInList');
   let foundProduct;
   while (typeof foundProduct === 'undefined'){
+    let products = await $$('.productInList');
     for (let product of products) {
       if ((await product.getText()).includes(productName)) {
         foundProduct = product;
@@ -31,7 +30,6 @@ When(/^I click on the buy button for "(.*)"$/, async (productName) => {
   }
   expect(foundProduct).toBeTruthy();
   let buyButton = await foundProduct.$('.buyButton');
-  await buyButton.scrollIntoView();
   await buyButton.click();
 });
 
@@ -43,5 +41,4 @@ Then(/^(\d*) item of "(.*)" should be added to the cart$/, async (quantity, prod
   console.warn("HEPP", tds[0])
   await expect(tds[0]).toHaveText(quantity);
   await expect(tds[1]).toHaveText(productName);
-  await tds[0].scrollIntoView();
 })
