@@ -1,8 +1,6 @@
 name: Unit, rest-api and gui tests
 
 on:
-  push:
-    branches: [main, dev]
   pull_request: 
     branches: [main, dev]
 

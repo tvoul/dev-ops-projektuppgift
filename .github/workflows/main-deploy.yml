@@ -5,6 +5,65 @@ on:
     branches: [main]
 
 jobs:
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v2 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test
+  
+  api-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v2 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: mv backend/database/template.db backend/database/shop.db
+    - run: npm install -g pm2
+    - run: pm2 start backend/index.js
+    - run: npm install -g newman
+    - run: newman run test-rest-api/test-visitor.postman_collection.json
+    - run: newman run test-rest-api/test-customer.postman_collection.json
+    - run: newman run test-rest-api/test-admin.postman_collection.json
+  
+  gui-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v2 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: mv backend/database/template.db backend/database/shop.db
+    - run: npm install -g pm2
+    - run: pm2 start backend/index.js
+    - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - run: sudo apt install ./google-chrome-stable_current_amd64.deb
+    - run: HEADLESS_CHROME=yes npm run wdio
   publish-main:
     needs: [unit-tests, api-tests, gui-tests]
     runs-on: ubuntu-latest
