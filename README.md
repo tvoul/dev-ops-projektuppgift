@@ -89,7 +89,9 @@ We test our API with Postman
 We test our GUI with WebdriverIO
 We perform unit tests with Jest.
 
-To run the tests locally you need to have the project up and running. 
+To run the unit tests write **npm test** in the terminal. The project doesn't need to be up and running for you to able to do these tests.
+
+To run the API and GUI tests locally you need to have the project up and running (**npm start**). After this open a new terminal window and write for API-tests and for GUI-tests.
 
 These tests are then gathered and automated to run in the following workflows:
 name the workflows
