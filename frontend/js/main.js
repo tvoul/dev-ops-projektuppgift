@@ -17,9 +17,6 @@ function renderList(cssSelector, list) {
     for (let value of Object.values(item)) {
       html += '<td class="' + typeof value + '">' + value + '</td>';
     }
-    if(window.location.pathname != '/user.html'){
-      html += '<td><button type="button">Click Me!</button></td>'
-    }
     html += '</tr>';
   }
   html += '</tbody></table>';
