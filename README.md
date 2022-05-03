@@ -9,6 +9,9 @@
 
 We communicate on Discord and keep track of the project via a Trello-board.
 
+We strive to work according to the three ways of DevOps (Kim et al.): The Principles of Flow, The Principles of Feedback, The Principles of Continual Learning and Experimentation.
+
+# Getting started
 After you clone the code from Github and open it with Visual Studio Code for the first time you need to run **npm install** in the terminal.
 
 The next step, which applies any time before you run the project, is to open the database folder and remove the shop.db file. Then copy the template.db file and rename this copy shop.db and place it back into the database folder.
@@ -79,12 +82,14 @@ Merging into dev: first you merge dev into your hotfix branch. The you merge you
 
 When the hotfix is no longer in active development the branch is deleted.
 
-# CI
+# Tests and CI
 We perform three different kinds of tests:
 
 We test our API with Postman
 We test our GUI with WebdriverIO
 We perform unit tests with Jest.
+
+To run the tests locally you need to have the project up and running. 
 
 These tests are then gathered and automated to run in the following workflows:
 name the workflows
