@@ -7,16 +7,16 @@
 - Mia (Entitet)
 - Tomas (tvoul)
 
-We communicate on Discord and keep track of the project via a Trello-board.
+We communicate on Discord and keep track of the project via a Trello-board. As a new teammember you get access to these - if you haven't already gotten access ask Tomas (Discord) and Mia (Trello).
 
 We strive to work according to the three ways of DevOps (Kim et al.): The Principles of Flow, The Principles of Feedback, The Principles of Continual Learning and Experimentation.
 
 # Getting started
 After you clone the code from Github and open it with Visual Studio Code for the first time you need to run **npm install** in the terminal.
 
-The next step, which applies any time before you run the project, is to open the database folder and remove the shop.db file. Then copy the template.db file and rename this copy shop.db and place it back into the database folder.
+The next step, which applies for a new clone of the project or when you have created a new branch, is to open the database folder and delete the **shop.db** file. Then copy the **template.db** file and rename this copy shop.db. Place your new shop.db file back into the database folder. When you are ready you need to have both files (shop.db and template.db) in the database folder. We do this because the shop.db file changes (as sessions are logged) when you run the project and these changes might cause unnecessary merge conflicts if we track it in version control.
 
-Now you are ready to run the project. You do this by typing **npm start** in the terminal.
+Now you are ready to run the project. You do this by typing **npm start** in the terminal. But before you start actively working with the project, please read further about how we work in branches.
 
 # Branching-setup
 
@@ -30,11 +30,15 @@ The **dev branch** is our default branch. This is where the version of the produ
 
 **Feature branches** are where you do most of your daily work. You create a feature branch for your work and when you are ready you merge it, following the merging strategy described below.
 
+The branches dev and main are protected. To be able to merge your changes into them you need to do a pullrequest. The automated tests run and should pass. There are also codeowners that do a manual coderewiev.
+
 ## Merge conflicts
 
 If you encounter a merging conflict where another teammembers code clashes with your own and you need to discuss how to proceed (compromise or decide whose code takes precedence) the team communicates primarily via Discord.
 
-## Branching and merging
+## Creating and merging branches
+
+As stated above the main branch is our working product that is live and the dev branch is the current new version of the product we are working on. We treat these branches with care and don't code in them. Our work will therefore happen in feature branches for planned work and hotfix branches for unplanned/urgent work.
 
 **Feature-branch**
 
@@ -82,28 +86,43 @@ Merging into dev: first you merge dev into your hotfix branch. The you merge you
 
 When the hotfix is no longer in active development the branch is deleted.
 
+**Main**
+
+When we are ready to go live with a new version of the project the dev branch will be merged into the main branch. 
+
+First you merge main into dev. Then you may merge dev into main and trigger the process for a new version of the product to go live.
+
+This process is described in more detail below under **CD**.
+
+
 # Tests and CI
+
 We perform three different kinds of tests:
 
-We test our API with Postman
-We test our GUI with WebdriverIO
-We perform unit tests with Jest.
+- We test our API with Postman/Newman
+- We test our GUI with WebdriverIO
+- We perform unit tests with Jest.
 
-To run the unit tests write **npm test** in the terminal. The project doesn't need to be up and running for you to able to do these tests.
+To run the unit tests write **npm test** in the terminal. The project doesn't need to be up and running for you to able to perform these tests.
 
-To run the API and GUI tests locally you need to have the project up and running (**npm start**). After this open a new terminal window and write for API-tests and for GUI-tests.
+To run the API and GUI tests locally you need to have the project up and running (**npm start**). After this open a new terminal window to run the commands for testing. 
 
-These tests are then gathered and automated to run in the following workflows:
+GUI-tests run with the command: **npm run wdio**. For the API-tests to run you need to install Newman (**npm install newman**) if you have not done so already. The tests are then run by the following commands: 
+- **newman run test-rest-api/test-visitor.postman_collection.json**
+- **newman run test-rest-api/test-customer.postman_collection.json** 
+- **newman run test-rest-api/test-admin.postman_collection.json**.
+
+These tests are gathered and automated to run in the following workflows:
 name the workflows
 
-The branches dev and main are protected. To be able to merge your changes you need to do a pullrequest. The automated tests run and should pass. There are also codeowners that do a coderewiev.
+The automated tests need to pass for a merge into our protected branches main and dev to be approved. 
 
 # CD
 
-When deploying [named test workflows] are needs, meaning they need to pass for a deployment job to run.
+When deploying [named test workflows] are needs, meaning all tests need to pass for a deployment job to run.
 
-Our dev server is:
-Our main (live) server is:
+Our dev server is: (not here yet as it might not be something we want to put openly on Github)
 
-About the database when we go live:
-(Tänk på att få med eventuella abers kring detta.)
+Our main (live) server is: (not here yet as it might not be something we want to put openly on Github)
+
+The replacing of shop.db with a copy of template.db is handled in the workflow when we deploy to both dev and main. But to avoid problems with info missing from the database if we have visitors/users in the webbshop when deploying a new live version we need to take the site down for maintenance before deployment.
