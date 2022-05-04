@@ -112,8 +112,7 @@ GUI-tests run with the command: **npm run wdio**. For the API-tests to run you n
 - **newman run test-rest-api/test-customer.postman_collection.json** 
 - **newman run test-rest-api/test-admin.postman_collection.json**.
 
-These tests are gathered and automated to run in the following workflows:
-name the workflows
+These tests are gathered and automated to run in the following workflow: tests.yml.
 
 The automated tests need to pass for a merge into our protected branches main and dev to be approved. 
 
