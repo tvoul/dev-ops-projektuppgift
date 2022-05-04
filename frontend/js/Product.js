@@ -40,8 +40,8 @@ class Product{
             <form>
               <input type="number" value="1" class="quantity" min="1" max="100">
               <button type="submit" class="buyButton">Buy</button>
-              <button type="submit" class="deleteProduct">Delete this item</button>
             </form>
+            <button type="submit" class="deleteProduct">Delete this item</button>
           </div>
         `;
       }
@@ -71,12 +71,34 @@ class Product{
           this.myProductList.shoppingCart.add(quantity, product);
         });
   
-        Product.eventListenersAdded = true;
+    
+    
+    listen('click', '.productInList .deleteProduct', evnet => {
+      let productElement = evnet.target.closest('.productInList, .product');
+      let id = +productElement.getAttribute('id').slice(1);
+      console.log(id)
 
+      try {
+        test = await(await fetch('/api/products', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(id)
+        })).json();
+        console.log(test)
+      }
+      catch (ignore) { }
+      
+
+
+    });
+
+
+    Product.eventListenersAdded = true;
    }
   
 }
 
 if (typeof module === 'object' && module.exports) {
   module.exports = Product;
+
 }

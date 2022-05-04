@@ -57,16 +57,16 @@ document.querySelector('body').addEventListener('submit', async (event) => {
   `;
 });
 
-document.querySelector('body').addEventListener('click', (event) => {
+document.querySelector('body').addEventListener('click', async (event) => {
 
     if (!event.target.closest('a[href="/addProduct"]')) { return; }
 
     event.preventDefault();
-
-    let registerDiv = document.querySelector('.addProduct');
-    registerDiv.innerHTML = renderAddProductForm();
-    registerDiv.classList.remove('hidden');
+    let addproductDiv = document.querySelector('.addProduct');
+    addproductDiv.innerHTML = renderAddProductForm();
+    addproductDiv.classList.remove('hidden');
     document.querySelector('.modal-hider').classList.remove('hidden');
 });
 
-
+  
+ 
