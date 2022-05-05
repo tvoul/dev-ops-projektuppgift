@@ -17,7 +17,8 @@ global.fetch = function (url, options) {
 // mock the toastr library used ? (Ask Thomas)
 global.toastr = {
     error: () => { },
-    success: () => { }
+    success: () => { },
+    info: () => { }
 }
 
 // Add a div to our fake with the correct id #shoppingCart
@@ -31,6 +32,9 @@ document.body.append(div); // add it to the fake DOM (jsDOM)
 const myShoppingCart = new ShoppingCart();
 
 describe('Test the shopping cart', () => {
+    // id, name, price, description, image, myProductList
+    let cartProduct = new Product(1, 'Fork', 19, 'Rare fork.', 'http://someimg.jpg');
+    let cartProduct2 = new Product(2, 'Spoon', 35, 'Rare spoon.', 'http://someimg.jpg');
 
 
     test('The shopping cart should be empty at start', () => {
@@ -40,14 +44,27 @@ describe('Test the shopping cart', () => {
 
     test('Add a product to shopping cart', async () => {
 
-        // id, name, price, description, image, myProductList
-        let cartProduct = new Product(1, 'Fork', 19, 'Rare fork.', 'http://someimg.jpg');
-
         await myShoppingCart.add(5, cartProduct);
 
-    });
-
-    test('A row with a product is expected to be added to shopping cart', () => {
         expect(myShoppingCart.orderRows).toHaveLength(1);
+
+    });
+    test('Remove product index of shoppingCart', async () => {
+        // Add another product so that we can see that we remove the correct one
+        await myShoppingCart.add(10, cartProduct2);
+
+        myShoppingCart.remove(0);
+
+        // Check that the Fork is gone
+
+        // Set a flag that we haven't found the fork yet
+        let forkExists = false;
+        // Loop through every order row trying to find the fork
+        for (let row of myShoppingCart.orderRows) {
+            // If we find the fork set forkExists to true
+            if (row.product.name === "Fork") { forkExists = true; }
+        }
+        // If the fork exists / true our remove hasn't work as it should
+        expect(forkExists).toBeFalsy();
     })
 });
