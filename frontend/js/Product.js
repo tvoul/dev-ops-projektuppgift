@@ -1,21 +1,21 @@
-class Product{
-    static eventListenersAdded = false;
-    
-    constructor(id, name, price, description, image, myProductList){
-        if (!Product.eventListenersAdded) {
-            this.addEventListeners();
-          }
+class Product {
+  static eventListenersAdded = false;
 
-        if(typeof id !== 'number'){throw(new Error('id must be a number'))}
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.myProductList = myProductList;
-        this.image = image;
+  constructor(id, name, price, description, image, myProductList) {
+    if (!Product.eventListenersAdded) {
+      this.addEventListeners();
     }
-    render() {
-        return `
+
+    if (typeof id !== 'number') { throw (new Error('id must be a number')) }
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.description = description;
+    this.myProductList = myProductList;
+    this.image = image;
+  }
+  render() {
+    return `
           <div class="product" id="i${this.id}">
           <img src="${this.image}">
             <h3>${this.name}</h3>
@@ -28,11 +28,11 @@ class Product{
               </form>
           </div>
         `;
-      }
-    
-      // A method that shows compact info about the product (in a list)
-      renderInList() {
-        return `
+  }
+
+  // A method that shows compact info about the product (in a list)
+  renderInList() {
+    return `
           <div class="productInList" id="i${this.id}">
             <img src="${this.image}">
             <h3>${this.name}</h3>
@@ -44,58 +44,56 @@ class Product{
             <button type="submit" class="deleteProduct">Delete this item</button>
           </div>
         `;
-      }
+  }
 
   addEventListeners() {
 
-        listen('submit', '.productInList form, .product form', event => {
-          // All web browser wants to reload the page on a form submit
-          // (for historical reasons) - we don't want that so we ask
-          // the browser to not perform it default action.
-          event.preventDefault();
-    
-          // get the form element and then the quantity input field
-          // - then read the quantity value
-          let formElement = event.target;
-          let quantityElement = formElement.querySelector('.quantity');
-          let quantity = +quantityElement.value;
+    listen('submit', '.productInList form, .product form', event => {
+      // All web browser wants to reload the page on a form submit
+      // (for historical reasons) - we don't want that so we ask
+      // the browser to not perform it default action.
+      event.preventDefault();
 
-          // which product did the user click on?
-          let productElement = event.target.closest('.productInList, .product');
-          // read the id from the id attribute of the product div
-          let id = +productElement.getAttribute('id').slice(1);
-          // find the product we clicked on in this.products
-          // by using the array method find
-          let product = this.myProductList.products.find(product => product.id === id);
-    
-          this.myProductList.shoppingCart.add(quantity, product);
-        });
-  
-    
-    
-    listen('click', '.productInList .deleteProduct', evnet => {
-      let productElement = evnet.target.closest('.productInList, .product');
+      // get the form element and then the quantity input field
+      // - then read the quantity value
+      let formElement = event.target;
+      let quantityElement = formElement.querySelector('.quantity');
+      let quantity = +quantityElement.value;
+
+      // which product did the user click on?
+      let productElement = event.target.closest('.productInList, .product');
+      // read the id from the id attribute of the product div
+      let id = +productElement.getAttribute('id').slice(1);
+      // find the product we clicked on in this.products
+      // by using the array method find
+      let product = this.myProductList.products.find(product => product.id === id);
+
+      this.myProductList.shoppingCart.add(quantity, product);
+    });
+
+
+
+    listen('click', '.productInList .deleteProduct', async event => {
+      let productElement = event.target.closest('.productInList, .product');
       let id = +productElement.getAttribute('id').slice(1);
       console.log(id)
 
       try {
-        test = await(await fetch('/api/products', {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(id)
+        test = await (await fetch('/api/products/' + id, {
+          method: 'DELETE'
         })).json();
         console.log(test)
       }
       catch (ignore) { }
-      
 
+      location.reload();
 
     });
 
 
     Product.eventListenersAdded = true;
-   }
-  
+  }
+
 }
 
 if (typeof module === 'object' && module.exports) {
