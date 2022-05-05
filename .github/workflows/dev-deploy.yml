@@ -92,7 +92,7 @@ jobs:
         run: ssh dev 'cd dev-branch/ && git fetch && git pull origin dev && npm install'
         
       - name: Reset database
-        run: ssh dev 'cd dev-branch && cp backend/database/template.db backend/database/shop.db'
+        run: ssh dev 'cd dev-branch/ && cp backend/database/template.db backend/database/shop.db'
 
       - name: Restart app
         run: ssh dev 'pm2 restart dev'
