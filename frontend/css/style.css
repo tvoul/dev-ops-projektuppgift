@@ -199,3 +199,7 @@ main {
   font-weight: bold
 }
 
+.closeRegisterForm, .closeLoginForm {
+  float: right;
+  cursor: pointer;
+}

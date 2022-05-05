@@ -59,7 +59,11 @@ class ProductList{
         });
       }
 }
-function listen(eventType, cssSelector, func) {
+
+//TEST IF THIS COMMENTED OUT SECTION BREAKS ANYTHING or if it can be removed 
+//(methinks this is objectoriented code, already part of helpers)
+
+/*function listen(eventType, cssSelector, func) {
     // delegated event handling
     // listen to the events on the whole body
     // but filter if we should do something
@@ -76,7 +80,7 @@ function listen(eventType, cssSelector, func) {
       // otherwise run the function
       func(event);
     });
-  }
+  }*/
 
   // For Jest - check if we are in a Node.js enviroment
   // if so export the class for Jest

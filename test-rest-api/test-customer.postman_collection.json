@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f0ee85a6-e732-4f8d-b6bf-0f3531059a1d",
+		"_postman_id": "8ce8336b-1440-44ae-8105-e37b6804bdbe",
 		"name": "test-customer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -48,7 +48,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var mockResp = {\"id\":1,\"email\":\"user@gmail.com\",\"firstName\":\"Myrtle Elizabeth\",\"lastName\":\"Warren\",\"userRole\":\"user\"}",
+							"var mockResp = {\"id\":1,\"email\":\"myrtle@moans.com\",\"firstName\":\"Myrtle Elizabeth\",\"lastName\":\"Warren\",\"userRole\":\"user\"}",
 							"let response = pm.response.json()",
 							"",
 							"pm.test('Check that i was able to log in', () => {",
@@ -64,7 +64,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user@gmail.com\",\n    \"password\": \"12345678\"\n}",
+					"raw": "{\n    \"email\": \"myrtle@moans.com\",\n    \"password\": \"12345678\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
