@@ -1,6 +1,5 @@
 function renderRegistrationForm() {
   return `
-    <button class="closeRegisterForm">x</button>
     <h1>Register</h1>
     <form name="registration">
       <label>
@@ -57,7 +56,6 @@ grabEl('body').addEventListener('submit', async (event) => {
 
   if (!result.changes) {
     grabEl('.register').innerHTML = `
-      <button class="closeRegisterForm">x</button>
       <h3>Something went wrong!</h3>
       <p>We could not register you right now because of a technical problem.</p>
       <p>Please try again later!</p>
@@ -66,7 +64,6 @@ grabEl('body').addEventListener('submit', async (event) => {
   }
 
   grabEl('.register').innerHTML = `
-    <button class="closeRegisterForm">x</button>
     <h3>Welcome as a customer!</h3>
     <p>You are now successfully registered. Have a magical time shopping!</p>
   `;
@@ -83,7 +80,3 @@ grabEl('body').addEventListener('click', (event) => {
   registerDiv.classList.remove('hidden');
   grabEl('.modal-hider').classList.remove('hidden');
 });
-
-//listen('click', '.closeRegisterForm', () => {
-    
-//});

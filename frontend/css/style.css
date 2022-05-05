@@ -198,8 +198,3 @@ main {
   padding-top: 10px;
   font-weight: bold
 }
-
-.closeRegisterForm, .closeLoginForm {
-  float: right;
-  cursor: pointer;
-}
