@@ -101,7 +101,8 @@ class ShoppingCart {
             productId: orderRow.product.id
           });
         }
-        console.log(reqBody)
+
+        // this part fails
         try {
           await (await fetch('/api/place-my-order', {
             method: 'POST',

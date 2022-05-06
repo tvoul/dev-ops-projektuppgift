@@ -54,6 +54,9 @@
       "put": true,
       "delete": true
     },
+    "delete-product":{
+      "delete":true
+    },
     "ordersXproducts": {
       "get": true,
       "post": true,
