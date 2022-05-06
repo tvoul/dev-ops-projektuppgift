@@ -31,13 +31,6 @@ class Product {
           </div>
         `;
   }
-  async getLogIn() {
-    let loggedIn = await (await fetch('/api/login')).json();
-    let userRole = loggedIn?.userRole;
-    console.log(userRole)
-    return userRole;
-
-  }
 
   // A method that shows compact info about the product (in a list)
   renderInList() {
