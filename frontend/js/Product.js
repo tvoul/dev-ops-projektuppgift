@@ -4,9 +4,11 @@ class Product {
   constructor(id, name, price, description, image, myProductList) {
     if (!Product.eventListenersAdded) {
       this.addEventListeners();
+      this.getLogIn();
     }
 
     if (typeof id !== 'number') { throw (new Error('id must be a number')) }
+    this.userRole;
     this.id = id;
     this.name = name;
     this.price = price;
@@ -29,6 +31,13 @@ class Product {
           </div>
         `;
   }
+  async getLogIn() {
+    let loggedIn = await (await fetch('/api/login')).json();
+    let userRole = loggedIn?.userRole;
+    console.log(userRole)
+    return userRole;
+
+  }
 
   // A method that shows compact info about the product (in a list)
   renderInList() {
@@ -44,8 +53,9 @@ class Product {
             <button type="submit" class="deleteProduct">Delete this item</button>
           </div>
         `;
-  }
-
+      
+    }
+  
   addEventListeners() {
 
     listen('submit', '.productInList form, .product form', event => {
