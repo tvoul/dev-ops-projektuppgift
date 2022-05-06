@@ -22,12 +22,12 @@ function renderRegistrationForm() {
   `;
 }
 
-document.querySelector('body').addEventListener('submit', async (event) => {
+grabEl('body').addEventListener('submit', async (event) => {
 
   let target = event.target;
 
   if (!target.closest('form[name="registration"]')) { return; }
-
+  
   event.preventDefault();
 
   let formElements = document.forms.registration.elements;
@@ -55,7 +55,7 @@ document.querySelector('body').addEventListener('submit', async (event) => {
   catch (ignore) { }
 
   if (!result.changes) {
-    document.querySelector('.register').innerHTML = `
+    grabEl('.register').innerHTML = `
       <h3>Something went wrong!</h3>
       <p>We could not register you right now because of a technical problem.</p>
       <p>Please try again later!</p>
@@ -63,20 +63,20 @@ document.querySelector('body').addEventListener('submit', async (event) => {
     return;
   }
 
-  document.querySelector('.register').innerHTML = `
-    <h3>Welcome as a member!</h3>
-    <p>You are now successfully registrered as a member!</p>
+  grabEl('.register').innerHTML = `
+    <h3>Welcome as a customer!</h3>
+    <p>You are now successfully registered. Have a magical time shopping!</p>
   `;
 });
 
-document.querySelector('body').addEventListener('click', (event) => {
+grabEl('body').addEventListener('click', (event) => {
 
   if (!event.target.closest('a[href="/register"]')) { return; }
 
   event.preventDefault();
 
-  let registerDiv = document.querySelector('.register');
+  let registerDiv = grabEl('.register');
   registerDiv.innerHTML = renderRegistrationForm();
   registerDiv.classList.remove('hidden');
-  document.querySelector('.modal-hider').classList.remove('hidden');
+  grabEl('.modal-hider').classList.remove('hidden');
 });

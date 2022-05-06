@@ -6,7 +6,7 @@ Given('that I am logged in', async () => {
   let loginHref = await $('#loginHref')
   await loginHref.click()
   let email = await $('#email')
-  await email.setValue('user@gmail.com')
+  await email.setValue('myrtle@moans.com')
   let password = await $('#password')
   await password.setValue('12345678')
   await $('#loginBtn').click()
