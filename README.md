@@ -124,7 +124,7 @@ Our main (live) server is: (not here yet as it might not be something we want to
 
 The replacing of shop.db with a copy of template.db is handled in the workflow when we deploy to both dev and main. But to avoid problems with info missing from the database if we have visitors/users in the webbshop when deploying a new live version we need to take the site down for maintenance before deployment.
 
-#DevOps
+# DevOps
 
 We strive to work according to the three ways of DevOps (Kim et al.): The Principles of Flow, The Principles of Feedback, The Principles of Continual Learning and Experimentation. 
 
