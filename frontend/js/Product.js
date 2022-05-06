@@ -4,7 +4,6 @@ class Product {
   constructor(id, name, price, description, image, myProductList) {
     if (!Product.eventListenersAdded) {
       this.addEventListeners();
-      this.getLogIn();
     }
 
     if (typeof id !== 'number') { throw (new Error('id must be a number')) }
