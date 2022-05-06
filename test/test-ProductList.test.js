@@ -6,6 +6,7 @@ const ProductList = require('../frontend/js/ProductList.js');
 global.Product = require('../frontend/js/Product.js');
 global.ShoppingCart = require('../frontend/js/ShoppingCart.js');
 
+
 new ShoppingCart();
 
 // ProductList expects the DOM to have a main element that it 
@@ -36,6 +37,8 @@ global.fetch = function (url) {
             ]
         };
     }
+    // otherwise sloppy mock
+    return { json: () => ({ email: 'somemail@gmail.com' }) };
 }
 
 // Nice helper: You can await pause(ms) to wait for things
@@ -67,9 +70,9 @@ test('Check if the product list gets products from the db', async () => {
 
 
 
-test('Does render send back the correct html/text', () => {
+test('Does render send back the correct html/text', async () => {
     let products = myProductList.products;
-    let renderedOutput = myProductList.render();
+    let renderedOutput = await myProductList.render();
 
     // check that all the product names are inside h3 tags
     for (let product of products) {

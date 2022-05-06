@@ -30,10 +30,20 @@ class Product {
           </div>
         `;
   }
+  async getLogIn() {
+    let loggedIn = await (await fetch('/api/login')).json();
+    let userRole = loggedIn?.userRole;
+    console.log(userRole)
+    return userRole;
+
+  }
 
   // A method that shows compact info about the product (in a list)
-  renderInList() {
-    return `
+  async renderInList() {
+    let user = await (await this.getLogIn());
+    console.log(user);
+    if (user == 'superadmin') {
+      return `
           <div class="productInList" id="i${this.id}">
             <img src="${this.image}">
             <h3>${this.name}</h3>
@@ -43,6 +53,18 @@ class Product {
               <button type="submit" class="buyButton">Buy</button>
             </form>
             <button type="submit" class="deleteProduct">Delete this item</button>
+          </div>
+        `;
+    } else
+      return `
+          <div class="productInList" id="i${this.id}">
+            <img src="${this.image}">
+            <h3>${this.name}</h3>
+            <p class="price">Price: ${this.price} kr</p>
+            <form>
+              <input type="number" value="1" class="quantity" min="1" max="100">
+              <button type="submit" class="buyButton">Buy</button>
+            </form>
           </div>
         `;
       
