@@ -9,8 +9,6 @@
 
 We communicate on Discord and keep track of the project via a Trello-board. As a new teammember you get access to these - if you haven't already gotten access ask Tomas (Discord) and Mia (Trello).
 
-We strive to work according to the three ways of DevOps (Kim et al.): The Principles of Flow, The Principles of Feedback, The Principles of Continual Learning and Experimentation.
-
 # Getting started
 After you clone the code from Github and open it with Visual Studio Code for the first time you need to run **npm install** in the terminal.
 
@@ -118,10 +116,20 @@ The automated tests need to pass for a merge into our protected branches main an
 
 # CD
 
-When deploying [named test workflows] are needs, meaning all tests need to pass for a deployment job to run.
+When deploying to dev or to main all the automated tests need to pass for a deployment job to run.
 
 Our dev server is: (not here yet as it might not be something we want to put openly on Github)
 
 Our main (live) server is: (not here yet as it might not be something we want to put openly on Github)
 
 The replacing of shop.db with a copy of template.db is handled in the workflow when we deploy to both dev and main. But to avoid problems with info missing from the database if we have visitors/users in the webbshop when deploying a new live version we need to take the site down for maintenance before deployment.
+
+#DevOps
+
+We strive to work according to the three ways of DevOps (Kim et al.): The Principles of Flow, The Principles of Feedback, The Principles of Continual Learning and Experimentation. 
+
+For the first way we make our work visible and limit work in progress by using and following up our Trello board. We have a CI/CD setup to enable a stable flow of work from development to operations to live product. 
+
+For the second way we have set up (and automated) tests to give fast indications if there are problems in the code. We also try to work responsibly following the branching strategy, and have routines for communication if there arises merging conflicts. Working according to scrum opens up for feedback both in the team and towards stakeholders.
+
+As the project itself is part of a learning environment continual learning and experimentation is a way of working. We try to support eachother in the team and have a high-trust culture where both success and failure are seen as ways to learn and move forward.
