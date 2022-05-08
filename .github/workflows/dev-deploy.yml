@@ -2,7 +2,7 @@ name: Dev - deploy after tests
 
 on:
   push:
-    branches: [dev]
+    branches: [feature-cont-deployment]
 
 jobs:
 
@@ -67,6 +67,7 @@ jobs:
 
   publish-dev:
     needs: [unit-tests, api-tests, gui-tests]
+    if: github.ref == 'refs/heads/feature-cont-deployment'
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH
